@@ -3,6 +3,18 @@
 
 ---
 
+# history
+
+- previous versions
+- difficult and lengthly build
+- search quality
+
+---
+
+![cat](http://i.imgur.com/Kq94a.jpg)
+
+---
+
 # geocoding
 
 Geocoding is the process of transforming input text, such as an address, or a name of a place—to a location on the earth's surface.
