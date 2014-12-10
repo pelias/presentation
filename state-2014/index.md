@@ -87,12 +87,6 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 
 - full planet build
   - 62.3MM points-of-interest
-  - total: 185GB of disk
-  - total: ~32GB FST (down from ~80GB)
-  - 8x r3.xlarge servers (down from 20x)
-    - 4 core
-    - 30.5 GB RAM
-    - 1 x 80GB SSD
 - no strict language requirement, currently written in node
 - no postgres
 
