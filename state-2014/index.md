@@ -223,7 +223,11 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 
 - config management with Chef/Opsworks
 - monitoring via Sensu/Cloudwatch/Pingdom
+ - standard host metrics alerting
+ - cluster state
+ - ELB unhealthy hosts
 - multiple independent systems
+ - switchover via DNS (Route53)
 
 ---
 
@@ -252,3 +256,5 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 - load testing
 - data ingestion time
 - rollback
+ - grace period on old cluster before new load?
+ - index snapshots?
