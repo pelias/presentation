@@ -366,6 +366,10 @@ var features = [
 
 ---
 
+![stats](https://fd-files-production.s3.amazonaws.com/70073/nd1azQDR8GKp3qwZ9JAmqQ?AWSAccessKeyId=AKIAIA2QBI5WP5HA3ZEA&Signature=Gd0GntKrb82BELuJ4aB%2BnLRFSIA%3D&Expires=1418229499)
+
+---
+
 # operations
 
 ### architecture
@@ -413,18 +417,18 @@ var features = [
   - import osm boundaries?
   - quattroshapes fixes work
 
+---
+
+# roadmap continued
+
+<br />
+
 - integrating addresses pipeline with osm/pelias (@severyn)
 
 - open issues:
   - guesswho
     - global suggest
   - node-osmium
-
-- use cases
-  - closest food
-  - airports
-  - postcodes
-
 
 - ngram?
 
@@ -438,3 +442,7 @@ var features = [
 - booking some speaking events (@alyssa)
 - waffle.io?
 - gitter?
+
+---
+
+![tourist](http://hellogiggles.com/wp-content/uploads/2014/09/20/lost-tourist.jpg)
