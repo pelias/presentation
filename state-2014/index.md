@@ -246,6 +246,11 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 ### architecture
 
 - Internet >> (ELB) Repose >> (ELB) API >> (ELB) Elasticsearch
+ - Repose: rate limiting proxy, java, on the fly config changes
+ - Elasticsearch: 1.3.4
+  - sharding determined largely by memory requirements which currently dictate node count
+  - replicas for redundancy
+   - more replicas influence FST requirements
 
 ---
 
