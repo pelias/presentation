@@ -227,6 +227,22 @@ Concordance is provided between quattroshapes, geonames.org, and Yahoo! GeoPlane
 
 ---
 
+# street addresses
+
+- import pipeline for all (most) address data
+- bundles together:
+  - normalized address schema
+  - address deduplication
+  - suggester payload addition
+- imports:
+  - *OpenAddresses*
+  - *OSM*
+  - *TIGER*
+  - etc.
+- simplify the process of running custom imports
+
+---
+
 # retrospective
 
 - geonames, what is the quality
