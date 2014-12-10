@@ -214,3 +214,41 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 
 - waffle.io
 - gitter
+
+---
+
+# operations
+
+### overview
+
+- config management with Chef/Opsworks
+- monitoring via Sensu/Cloudwatch/Pingdom
+- multiple independent systems
+
+---
+
+# operations
+
+### index metrics
+
+- 62.3 million documents
+- 371GB on disk (with 1 replica)
+- 64GB FST size (down from ~190GB)
+
+---
+
+# operations
+
+### architecture
+
+- Internet >> (ELB) Repose >> (ELB) API >> (ELB) Elasticsearch
+
+---
+
+# operations
+
+### concerns
+
+- load testing
+- data ingestion time
+- index snapshots
