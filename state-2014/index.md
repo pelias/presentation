@@ -323,6 +323,10 @@ var features = [
 
 ---
 
+![cat](http://ecx.images-amazon.com/images/I/31iaim9GeOL.jpg)
+
+---
+
 # search logic
 
 - just nearby
@@ -359,6 +363,10 @@ var features = [
 - testing
   - unit tests
   - regression testing
+
+---
+
+![cat](https://c1.staticflickr.com/1/8/6734519_569a7e0947.jpg)
 
 ---
 
@@ -421,7 +429,7 @@ var features = [
 
 ---
 
-![stats](https://fd-files-production.s3.amazonaws.com/70073/nd1azQDR8GKp3qwZ9JAmqQ?AWSAccessKeyId=AKIAIA2QBI5WP5HA3ZEA&Signature=Gd0GntKrb82BELuJ4aB%2BnLRFSIA%3D&Expires=1418229499)
+![stats](http://www.quickmeme.com/img/33/33fadfa1e97738f6bd7692f6e4b3fe7e329b989d257566fe0a1a2482999ddc29.jpg)
 
 ---
 
