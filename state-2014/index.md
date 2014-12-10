@@ -43,6 +43,10 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 
 ---
 
+![cat](https://gigaom2.files.wordpress.com/2012/05/fat-cat-money.jpg)
+
+---
+
 # open source
 
 <br />
@@ -51,6 +55,10 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 - Photon
 - Two Fishes
 - ??
+
+---
+
+![cat](http://origin.arstechnica.com/journals/linux.media/300/funny-pictures-crazy-cat-bird-window-open.jpg)
 
 ---
 
@@ -81,6 +89,10 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 
 ---
 
+![cat](http://www.themarysue.com/wp-content/uploads/2013/03/Cat-on-a-Map.jpg)
+
+---
+
 # use cases
 
 <br />
@@ -101,6 +113,10 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
   - 62.3MM points-of-interest
 - no strict language requirement, currently written in node
 - no postgres
+
+---
+
+![cat](http://www.townsandtrails.com/blog/wp-content/uploads/2010/05/Map-Cat.jpg)
 
 ---
 
@@ -225,6 +241,10 @@ var features = [
 
 ---
 
+![cat](https://c2.staticflickr.com/6/5121/5192869874_2514188528.jpg)
+
+---
+
 # geopipes
 
 ![image](https://raw.githubusercontent.com/pelias/presentation/master/state-2014/geopipes.png)
@@ -250,6 +270,10 @@ var features = [
 <br />
 
 - golang / c++
+
+---
+
+![cat](http://www.lolcats.com/images/u/08/23/lolcatsdotcomlzhksdvmkt1i1t2y.jpg)
 
 ---
 
@@ -354,6 +378,10 @@ var features = [
 
 ---
 
+![cat](http://assets.diylol.com/hfs/2c9/925/2b4/resized/street-cat-meme-generator-the-streets-need-me-550389.jpg)
+
+---
+
 # operations
 
 ### overview
@@ -404,6 +432,10 @@ var features = [
 - rollback
  - grace period on old cluster before new load?
  - index snapshots?
+
+---
+
+![cat](http://cache.desktopnexus.com/thumbnails/513548-bigthumbnail.jpg)
 
 ---
 
