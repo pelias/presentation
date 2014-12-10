@@ -251,4 +251,4 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 
 - load testing
 - data ingestion time
-- index snapshots
+- rollback
