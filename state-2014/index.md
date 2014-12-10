@@ -338,7 +338,7 @@ var features = [
 
 ---
 
-# street addresses
+# addresses pipeline
 
 - import pipeline for all (most) address data
 - bundles together:
@@ -350,7 +350,22 @@ var features = [
   - *OSM*
   - *TIGER*
   - etc.
-- simplify the process of running custom imports
+
+---
+
+# custom address imports
+
+- abstracts away boilerplate, manual configuration
+- simplify custom address imports for users
+- cut redundancy in our import codebase
+
+---
+
+# addresses: future
+
+- currently running test imports
+- next step might be a geocoder for the US
+- iterate, integrate into production
 
 ---
 
