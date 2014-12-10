@@ -138,6 +138,45 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 
 ---
 
+# search logic
+
+- just nearby
+  - geodistance from lat/lon
+- results from neighboring cities/states/countries
+  - uses different precision levels (5+3+1)
+- include admin values 
+  - based on the zoom level 
+  - Ex: show countries at zoom<8 & neighborhoods zoom 12+
+- taking weights into account
+  - admin1 > neighborhood > osmnode > geoname
+- fuzzy matching
+  - generates an edit distance based on the search term length
+  - 'layd moody' -> 'lady moody', 'maysbille' -> 'maysville'
+
+---
+
+# search logic (experimental)
+
+- search term analysis on the fly
+- if search term starts with a number, prioritize street addresses
+- if search term is less than x characters without a space, show higher admins
+- tokenize on comma and ignore the tokens that follow
+- improve general search quality based on relevance & feedback (future)
+
+---
+
+# search quality 
+
+- what does good search quality mean?
+  - personalization?
+  - being smart (creepy?)
+  - doing the right thing (what?)
+- testing
+  - unit tests
+  - regression testing
+
+---
+
 # geopipes
 
 - @see import pipeline, architecture
