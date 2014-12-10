@@ -348,6 +348,55 @@ var features = [
 
 ---
 
+# operations
+
+### overview
+
+- config management with Chef/Opsworks
+- monitoring via Sensu/Cloudwatch/Pingdom
+ - standard host metrics alerting
+ - cluster state
+ - ELB unhealthy hosts
+- multiple independent systems
+ - switchover via DNS (Route53)
+
+---
+
+# operations
+
+### index metrics
+
+- 62.3 million documents
+- 371GB on disk (with 1 replica)
+- 64GB FST size (down from ~190GB)
+
+---
+
+# operations
+
+### architecture
+
+- Internet >> (ELB) Repose >> (ELB) API >> (ELB) Elasticsearch
+ - Repose: rate limiting proxy, java, on the fly config changes
+ - Elasticsearch: 1.3.4
+  - sharding determined largely by memory requirements which currently dictate node count
+  - replicas for redundancy
+   - more replicas influence FST requirements
+
+---
+
+# operations
+
+### concerns
+
+- load testing
+- data ingestion time
+- rollback
+ - grace period on old cluster before new load?
+ - index snapshots?
+
+---
+
 # retrospective
 
 - geonames, what is the quality
