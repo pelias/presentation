@@ -19,7 +19,7 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 
 ---
 
-# ecosystem - free tier
+# free tier
 
 <br />
 
@@ -31,7 +31,7 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 
 ---
 
-# ecosystem - open source
+# open source
 
 <br />
 
@@ -134,15 +134,11 @@ Concordance is provided between quattroshapes, geonames.org, and Yahoo! GeoPlane
 
 ---
 
-![image](https://mail.google.com/mail/u/1/?ui=2&ik=108c18e453&view=fimg&th=14a30724c97760fe&attid=0.2&disp=emb&realattid=ii_i3hn237e2_14a307188d9c2f93&attbid=ANGjdJ9_Lc9E5NenpyrPx9dGWxrAfnY_s7Un34_qiyLdXmpEHnsXakNZc7biHubI79WEqF4uqkKv7cOxm01H2FS5v4k6f3uRa1hruThpxSKu7YcoIdkkAfScvLuqq-E&sz=w970-h806&ats=1418225924448&rm=14a30724c97760fe&zw&atsh=1)
+![image](https://raw.githubusercontent.com/pelias/presentation/master/state-2014/admin1.png)
 
 ---
 
-![image](https://mail.google.com/mail/u/1/?ui=2&ik=108c18e453&view=fimg&th=14a30724c97760fe&attid=0.1&disp=emb&realattid=ii_i3hn235l0_14a307188d9c2f93&attbid=ANGjdJ8Y-QBcyi3cnbYhwAlScca32YsoiOipGA1M293bOq2niSOBsRmYk8HlgXxMIZBQS4Buj6nc98jxOB94hmeec84XpMBO6JOtfWf8B_LyJoQM1cYSOcJKcvywd0Y&sz=w970-h612&ats=1418225924448&rm=14a30724c97760fe&zw&atsh=1)
-
----
-
-![image](https://raw.githubusercontent.com/pelias/presentation/master/state-2014/osm-london.png)
+![image](https://raw.githubusercontent.com/pelias/presentation/master/state-2014/locality.png)
 
 ---
 
@@ -150,7 +146,12 @@ Concordance is provided between quattroshapes, geonames.org, and Yahoo! GeoPlane
 
 <br />
 
-![](https://ci4.googleusercontent.com/proxy/ek1ah_F_PhZDTTO3eXhF3OxueE5wog6KCvb0dW4sV22hEROS_3ECyDP7nLOYkmYXKycWo4zOao3HzLpqSeNUPEGlhq_Fum-6o_mBG-kAN0ADvAE=s0-d-e1-ft#http://www.esenvironmental.com/picts/chemistry/gis_layers.gif)
+![image](https://raw.githubusercontent.com/pelias/presentation/master/state-2014/intersection.gif)
+
+
+---
+
+![image](https://raw.githubusercontent.com/pelias/presentation/master/state-2014/osm-london.png)
 
 ---
 
@@ -177,6 +178,7 @@ Concordance is provided between quattroshapes, geonames.org, and Yahoo! GeoPlane
  - ways: 263,788,642
  - relations: 2,978,242
 - free tagging
+- alternate names/languages
 - global coverage
 
 ---
@@ -186,6 +188,34 @@ Concordance is provided between quattroshapes, geonames.org, and Yahoo! GeoPlane
 <br />
 
 ![image](http://osm.analysesig.net/osm2pgsql_schema/diagrams/planet_osm_nodes.implied2degrees.png)
+
+---
+
+# feature list
+
+```javascript
+var features = [
+  "amenity",
+  "building",
+  "shop",
+  "office",
+  "public_transport",
+  "cuisine",
+  "railway",
+  "sport",
+  "natural",
+  "tourism",
+  "leisure",
+  "historic",
+  "man_made",
+  "landuse",
+  "waterway",
+  "aerialway",
+  "aeroway",
+  "craft",
+  "military"
+];
+```
 
 ---
 
@@ -209,6 +239,42 @@ Concordance is provided between quattroshapes, geonames.org, and Yahoo! GeoPlane
 - nodejs
   - streams
   - modularity
+  - easy to use
+
+<br />
+
+- golang / c++
+
+---
+
+![image](https://s3.amazonaws.com/kinlane-productions/api-evangelist/elasticsearch/elastic-search-logo.jpg)
+
+<br />
+
+- java
+- enterprisey
+- lucene
+- full text search
+- geo capabilities
+- sharding
+
+---
+
+![index](https://developer.apple.com/library/mac/documentation/UserExperience/Conceptual/SearchKitConcepts/art/inverted_index_textposition.jpg)
+
+---
+
+# stemming
+
+<br />
+
+![stem](https://leanjavaengineering.files.wordpress.com/2012/02/figure3.png)
+
+---
+
+# FST
+
+![fst](http://www.elasticsearch.org/content/uploads/2013/08/suggest_1.png)
 
 ---
 
