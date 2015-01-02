@@ -1,0 +1,11 @@
+
+Pelias is an open source geocoder based on Elasticsearch that's challenging the status quo model of closed, prorietary geographic search tools and services. We believe the best way to build locally relevant and accurate geographic search is in the open--which is why we're building an open source geocoder that anyone can build and run themselves.
+
+Pelias has open data at its foundation. It's designed to work easily with a mix of open datasets (such as OpenStreetMap, Geonames, and OpenAddresses) while flexible enough to also work with proprietary datasets. Instead of taking a traditional relational database with geographic features and trying to hack together full-text search, it's now possible to have the best of both worlds--enterprise-grade full-text search and enterprise-grade geographic tools (and all of it MIT licensed and free!).
+
+We have a full-time team working on Pelias, but we need contributors. That's why we would love to speak at ElasticON: to reach out to and build a community. The talk would focus on elasticsearch as a geographic search engine, running through the features, discussing lessons learned, and showing a few cool demos.
+
+If you'd like more info, please reach out to us and we can provide more information.
+
+https://mapzen.com/
+https://github.com/pelias/pelias
