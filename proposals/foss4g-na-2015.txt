@@ -1,0 +1,7 @@
+Pelias - An open source geocoder built with elasticsearch and node.js
+
+Pelias is a modular open-source geocoder using ElasticSearch for fast autocomplete and forward and reverse geocoding. It's designed to support a variety of datasets, including Geonames, Quattroshapes, OSM, and whatever else you can throw at it.
+
+This session aims at discussing some of the core modules of Pelias and familiarizing the community with some of the design choices made by us and the geocoder itself. Additionally, there will be a few demos (projects powered by pelias) and finally some Q&A.
+
+https://github.com/pelias
