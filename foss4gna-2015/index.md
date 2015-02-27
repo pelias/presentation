@@ -39,8 +39,7 @@
 
 ## Data in, Data out
 
-- ### Import Pipeline
-- ### HTTP API
+![image](https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias-diagram.png)
 
 ---
 
@@ -59,26 +58,18 @@
 
 ## Open datasets used in Pelias
 
-- ***Geonames*** (~9M pois; has population count, 2M US)
-- ***Openstreetmap*** (street addresses, poi & polygons)
-- ***Quattroshapes*** (polygons; has foursquare, Flickr, Natural Earth, & open govt data)
-- ***OpenAddresses*** (more street addresses)
-- ***&middot;&middot;&middot;***
-
-***You can use any geospatial dataset with pelias***
-
----
-
-## Lets collaborate!
-
-<br/>***https://github.com/pelias/geonames***<br/>
-![image](https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/geonames.png)
-<br/>***https://github.com/pelias/openstreetmap***<br/>
-![image](https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/osm.png)
-<br/>***https://github.com/pelias/quattroshapes***<br/>
-![image](https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/quattroshapes.png)
-<br/>***https://github.com/pelias/openaddresses***<br/>
-![image](https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/openaddresses.png)
+- ***Geonames*** 
+  - ~9M pois; has population count, 2M US
+  - ***https://github.com/pelias/geonames***
+- ***Openstreetmap*** 
+  - street addresses, poi & polygons
+  - ***https://github.com/pelias/openstreetmap***
+- ***Quattroshapes*** 
+  - polygons; has foursquare checkins, Flickr data
+  - ***https://github.com/pelias/quattroshapes***
+- ***OpenAddresses*** 
+  - more street addresses
+  - ***https://github.com/pelias/openaddresses***
 
 ---
 
@@ -115,19 +106,13 @@
 
 ---
 
-## Suggester pipeline
+## Address Deduplicator
 
-- ```npm install pelias-suggester-pipeline```
-- https://github.com/pelias/suggester-pipeline
-- exports a transform stream that builds the suggester payload (```/suggest```)
-
-```javascript
-  var peliasSuggesterPipeline = require( 'pelias-suggester-pipeline' );
-
-  someDocumentStream
-    .pipe( peliasSuggesterPipeline.pipeline )
-    .pipe( /* rest of pelias pipeline */ );
-```
+- ```npm install pelias-address-deduplicator```
+- https://github.com/pelias/address-deduplicator
+- expects pelias/model Document objects
+- needs to be running across different data import pipelines
+- uses its own data store to figure out duplicates
 
 ---
 
@@ -150,13 +135,19 @@
 
 ---
 
-## Address Deduplicator
+## Suggester pipeline
 
-- ```npm install pelias-address-deduplicator```
-- https://github.com/pelias/address-deduplicator
-- expects pelias/model Document objects
-- needs to be running across different data import pipelines
-- uses its own data store to figure out duplicates
+- ```npm install pelias-suggester-pipeline```
+- https://github.com/pelias/suggester-pipeline
+- exports a transform stream that builds the suggester payload (```/suggest```)
+
+```javascript
+  var peliasSuggesterPipeline = require( 'pelias-suggester-pipeline' );
+
+  someDocumentStream
+    .pipe( peliasSuggesterPipeline.pipeline )
+    .pipe( /* rest of pelias pipeline */ );
+```
 
 ---
 
@@ -180,6 +171,14 @@
 
 ---
 
+## How to build a local Geocoder
+
+#### without jumping too many hoops
+***https://github.com/pelias/vagrant***
+***https://mapzen.com/blog/pelias-setup-tutorial***
+
+---
+
 ## Getting data out of Elasticsearch
 
 - Queries
@@ -199,6 +198,18 @@
 ---
 
 ## API
+
+- endpoints
+  - /search
+  - /suggest
+  - /reverse
+  - /doc
+- params
+  - ?input=
+  - ?lat=&lon=
+  - ?bbox=
+  - ?size=
+  - ?layers=
 
 ---
 
