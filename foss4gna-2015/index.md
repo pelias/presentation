@@ -155,6 +155,12 @@ transforms your current geographic location in to a list of places nearby
 
 ---
 
+## Data flow 
+
+![image](https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias_architecture_2.png)
+
+---
+
 <section>
   <h2>Import Pipeline</h2>
   <h5 class="highlight">Putting data into Elasticsearch</h5>
@@ -207,7 +213,7 @@ transforms your current geographic location in to a list of places nearby
 <li>uses its own data store to figure out duplicates</li>
 </ul>
 </section>
-<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/heirarchy.png"><h2>Hierarchy Lookup</h2>
+<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/hierarchy.png"><h2>Hierarchy Lookup</h2>
 <ul>
 <li><code>npm install pelias-admin-lookup</code></li>
 <li><a href="https://github.com/pelias/admin-lookup">https://github.com/pelias/admin-lookup</a></li>
