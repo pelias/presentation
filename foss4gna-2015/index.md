@@ -177,7 +177,7 @@ transforms your current geographic location in to a list of places nearby
   </ul>
   <pre><code class="javascript">          node scripts/create_index.js;</code></pre>
 </section>
-<section><h2>Pelias Data Model</h2>
+<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias-vert-1.png"><h2>Pelias Data Model</h2>
 <ul>
 <li><code>npm install pelias-model</code></li>
 <li><a href="https://github.com/pelias/model">https://github.com/pelias/model</a></li>
@@ -198,7 +198,7 @@ transforms your current geographic location in to a list of places nearby
     .setCentroid({ lon: -73.98, lat: 40.72 });
 </code></pre>
 </section>
-<section><h2>Address Deduplicator</h2>
+<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias-vert-1.png"><h2>Address Deduplicator</h2>
 <ul>
 <li><code>npm install pelias-address-deduplicator</code></li>
 <li><a href="https://github.com/pelias/address-deduplicator">https://github.com/pelias/address-deduplicator</a></li>
@@ -207,7 +207,7 @@ transforms your current geographic location in to a list of places nearby
 <li>uses its own data store to figure out duplicates</li>
 </ul>
 </section>
-<section><h2>Hierarchy Lookup</h2>
+<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias-vert-1.png"><h2>Hierarchy Lookup</h2>
 <ul>
 <li><code>npm install pelias-admin-lookup</code></li>
 <li><a href="https://github.com/pelias/admin-lookup">https://github.com/pelias/admin-lookup</a></li>
@@ -224,7 +224,7 @@ transforms your current geographic location in to a list of places nearby
   });
 </code></pre>
 </section>
-<section><h2>Suggester pipeline</h2>
+<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias-vert-1.png"><h2>Suggester pipeline</h2>
 <ul>
 <li><code>npm install pelias-suggester-pipeline</code></li>
 <li><a href="https://github.com/pelias/suggester-pipeline">https://github.com/pelias/suggester-pipeline</a></li>
@@ -238,7 +238,7 @@ transforms your current geographic location in to a list of places nearby
     .pipe( dataStream );
 </code></pre>
 </section>
-<section><h2>dbclient</h2>
+<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias-vert-1.png"><h2>dbclient</h2>
 <ul>
 <li><code>npm install pelias-dbclient</code></li>
 <li><a href="https://github.com/pelias/dbclient">https://github.com/pelias/dbclient</a></li>
