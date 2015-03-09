@@ -35,10 +35,6 @@ transforms your current geographic location in to a list of places nearby
 - Not all can support autocomplete
 - Not all have easy build process
 
-<aside class="notes">
-    Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-</aside>
-
 ---
 
 <section>  
@@ -91,14 +87,14 @@ transforms your current geographic location in to a list of places nearby
 
 ## Pelias
 
-- built with <span class="highlight">***elasticsearch and node.js***</span>
-- completely open-source and <span class="highlight">***MIT licensed***</span>
-- based on <span class="highlight">***open-data***</span> primarily but is <span class="highlight">***data agnostic***</span>
-- You can <span class="highlight">***install it locally***</span> and modify to suit your geocoding needs
-- supports <span class="highlight">***fast autocomplete***</span>
-- It's <span class="highlight">***modular***</span>
-- <span class="highlight">***easy to install***</span>
-- requires <span class="highlight">***no external dependencies***<span>
+- built with ***elasticsearch and node.js***
+- completely open-source and ***MIT licensed***
+- based on ***open-data*** primarily but it is ***data agnostic***
+- ***install it locally*** and modify to suit your geocoding needs
+- supports ***fast autocomplete***
+- It's ***modular***
+- ***easy to install***
+- requires ***no external dependencies***
 
 ---
 
