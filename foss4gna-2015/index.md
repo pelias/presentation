@@ -377,16 +377,18 @@ no search logic thats dependent on dataset (search logic has to be generic when 
 
 ---
 
-## use cases
+## Collaborate with us!
 
-- full planet build
-- regional geocoder
-- mobile apps
-- attach location data to forms
-- postcode finder
-- autocomplete airports for flight search
-- correct postal addresses
+***<a href="https://github.com/pelias/pelias">https://github.com/pelias/pelias</a>***
 
+<aside class="notes">
+- We would love to work with you<br/><br/>
+- Have a unique dataset? Write a pelias importer!<br/><br/>
+- Open an issue, contribute on an existing issue<br/><br/>
+- Discuss on topics like 'street intersections, NLP etc' <br/><br/>
+- Review our code, comment on our pull requests<br/><br/>
+- Get involved, Join the conversation at
+</aside>
 <style>
  .highlight, .reveal em{color:#13daec}
 </style>
