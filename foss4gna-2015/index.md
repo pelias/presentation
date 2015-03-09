@@ -1,6 +1,8 @@
 
 # Pelias
 
+### An open source geocoder built with elasticsearch and node.js
+
 ---
 
 # Geocoding
@@ -379,7 +381,7 @@ no search logic thats dependent on dataset (search logic has to be generic when 
 
 ## Collaborate with us!
 
-***<a href="https://github.com/pelias/pelias">https://github.com/pelias/pelias</a>***
+***https://github.com/pelias/pelias/issues***
 
 <aside class="notes">
 - We would love to work with you<br/><br/>
@@ -387,6 +389,7 @@ no search logic thats dependent on dataset (search logic has to be generic when 
 - Open an issue, contribute on an existing issue<br/><br/>
 - Discuss on topics like 'street intersections, NLP etc' <br/><br/>
 - Review our code, comment on our pull requests<br/><br/>
+- All our main stories/issues are opened here<br/><br/>
 - Get involved, Join the conversation at
 </aside>
 <style>
