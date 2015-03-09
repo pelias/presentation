@@ -177,7 +177,7 @@ transforms your current geographic location in to a list of places nearby
   </ul>
   <pre><code class="javascript">          node scripts/create_index.js;</code></pre>
 </section>
-<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias-vert-1.png"><h2>Pelias Data Model</h2>
+<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/model.png"><h2>Pelias Data Model</h2>
 <ul>
 <li><code>npm install pelias-model</code></li>
 <li><a href="https://github.com/pelias/model">https://github.com/pelias/model</a></li>
@@ -198,7 +198,7 @@ transforms your current geographic location in to a list of places nearby
     .setCentroid({ lon: -73.98, lat: 40.72 });
 </code></pre>
 </section>
-<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias-vert-1.png"><h2>Address Deduplicator</h2>
+<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/deduper.png"><h2>Address Deduplicator</h2>
 <ul>
 <li><code>npm install pelias-address-deduplicator</code></li>
 <li><a href="https://github.com/pelias/address-deduplicator">https://github.com/pelias/address-deduplicator</a></li>
