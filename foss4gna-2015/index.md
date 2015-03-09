@@ -250,57 +250,76 @@ transforms your current geographic location in to a list of places nearby
 
 ---
 
-## Getting data out of Elasticsearch
+<section>
+<h2>Getting data out of Elasticsearch</h2>
+<ul>
+<li>Search Logic</li>
+<li>API</li>
+</ul>
+</section>
 
-- Search Logic
-- API
-
----
-
-## Queries
-
-- ```npm install geopipes-elasticsearch-backend```
-- https://github.com/geopipes/elasticsearch-backend
-- supports the following
-  - get, mget
-  - put
-  - search (with geo_distance, geo_bbox, geo_shape)
-
----
-
-## Search Logic
-
-- ***population***
-  - portland, oregon > portland, maine
-- ***popularity***
-  - times square, new york > times square, south dakota
-- ***pop score*** of admin area it belongs to
-  - 123 main st, san francisco > 123 main st, pawnee
-- ***geo bias*** - lat/lon/bbox to sort the results.
-  - soho, new york > soho, london (if searching from new york)
-- ***boosting*** certain admin values (***admin0*** - countries)
-  - china > chinatown
-- ***mixing*** popular locations in the search results regardless of where you are 
-
+<section><h2>Search Logic</h2>
+<ul>
+<li><strong><em>population</em></strong><ul>
+<li>portland, oregon &gt; portland, maine</li>
+</ul>
+</li>
+<li><strong><em>popularity</em></strong><ul>
+<li>times square, new york &gt; times square, south dakota</li>
+</ul>
+</li>
+<li><strong><em>pop score</em></strong> of admin area it belongs to<ul>
+<li>123 main st, san francisco &gt; 123 main st, pawnee</li>
+</ul>
+</li>
+<li><strong><em>geo bias</em></strong> - lat/lon/bbox to sort the results.<ul>
+<li>soho, new york &gt; soho, london (if searching from new york)</li>
+</ul>
+</li>
+<li><strong><em>boosting</em></strong> certain admin values (<strong><em>admin0</em></strong> - countries)<ul>
+<li>china &gt; chinatown</li>
+</ul>
+</li>
+<li><strong><em>mixing</em></strong> popular locations in the search results regardless of where you are </li>
+</ul>
 <aside class="notes">
 no search logic thats dependent on dataset (search logic has to be generic when you are working with a geocoder thats input dataset agnostic)
 </aside>
+</section>
 
----
+<section><h2>API Endpoints</h2>
+<ul>
+<li><strong><em>/search</em></strong></li>
+<li><strong><em>/search/coarse</em></strong></li>
+<li><strong><em>/suggest</em></strong></li>
+<li><strong><em>/suggest/coarse</em></strong></li>
+<li><strong><em>/reverse</em></strong></li>
+<li><strong><em>/doc</em></strong></li>
+</ul>
+</section>
 
-## API
+<section><h2>API Parameters</h2>
+<ul>
+<li><strong><em>?input=</em></strong></li>
+<li><strong><em>?lat=&amp;lon=</em></strong></li>
+<li><strong><em>?bbox=</em></strong></li>
+<li><strong><em>?size=</em></strong></li>
+<li><strong><em>?layers=</em></strong></li>
+</ul>
+</section>
 
-- endpoints
-  - ***/search***
-  - ***/suggest***
-  - ***/reverse***
-  - ***/doc***
-- params
-  - ***?input=***
-  - ***?lat=&lon=***
-  - ***?bbox=***
-  - ***?size=***
-  - ***?layers=***
+<section><h2>Queries</h2>
+<ul>
+<li><code>npm install geopipes-elasticsearch-backend</code></li>
+<li><a href="https://github.com/geopipes/elasticsearch-backend">https://github.com/geopipes/elasticsearch-backend</a></li>
+<li>supports the following<ul>
+<li>get, mget</li>
+<li>put</li>
+<li>search (with geo_distance, geo_bbox, geo_shape)</li>
+</ul>
+</li>
+</ul>
+</section>
 
 ---
 
