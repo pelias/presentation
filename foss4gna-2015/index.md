@@ -157,7 +157,7 @@ transforms your current geographic location in to a list of places nearby
 
 ## Data flow 
 
-![image](https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias_architecture_2.png)
+<img style="border:0 none;background:transparent;box-shadow:none" src="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias_architecture_2.png" height="600"/>
 
 ---
 
