@@ -126,18 +126,6 @@ transforms your current geographic location in to a list of places nearby
 
 ---
 
-<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/modular.jpeg">
-  <h1>Pelias is modular! </h1>
-</section>
-
----
-
-## Pelias Architecture
-
-![image](https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias_architecture.png)
-
----
-
 ## Open datasets - Pelias importers
 
 - ***Openstreetmap*** 
@@ -152,6 +140,18 @@ transforms your current geographic location in to a list of places nearby
 - ***Geonames*** 
   - ~9M pois; has population count, 2M US
   - ***https://github.com/pelias/geonames***
+
+---
+
+<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/modular.jpeg">
+  <h1>Pelias is modular! </h1>
+</section>
+
+---
+
+## Pelias Architecture
+
+![image](https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias_architecture.png)
 
 ---
 
@@ -316,6 +316,15 @@ no search logic thats dependent on dataset (search logic has to be generic when 
 </ul>
 </section>
 
+<section><h2>API Issues</h2>
+<ul>
+<li>Context suggester doesn't work without location information</li>
+<li>So, ***/suggest*** autocomplete only works with lat/lon</li>
+<li>This is expected to land in Elasticsearch v2.0.0</li>
+<li><a href="https://github.com/pelias/api">https://github.com/pelias/api</a></li>
+</ul>
+</section>
+
 <section><h2>Queries</h2>
 <ul>
 <li><code>npm install geopipes-elasticsearch-backend</code></li>
@@ -327,6 +336,29 @@ no search logic thats dependent on dataset (search logic has to be generic when 
 </ul>
 </li>
 </ul>
+</section>
+
+<section><h2>Customize your output address</h2>
+<ul>
+<li>Pelias API lets you set an output format per country basis</li>
+<li><a href="https://github.com/pelias/api/blob/master/helper/outputSchema.json">helper/outputSchema.json</a></li>
+</ul>
+<pre><code>
+  {
+    "USA": {
+      "local": ["local_admin", "locality", "neighborhood", "admin2"],
+      "regional": ["admin1_abbr", "admin1", "admin0"]
+    },
+    "GBR": {
+      "local": ["neighborhood", "admin2", "local_admin", "locality"],
+      "regional": ["admin2","admin0","admin1"]
+    },
+    "default": {
+      "local": ["local_admin", "locality", "neighborhood", "admin2"],
+      "regional": ["admin1_abbr", "admin1", "admin0"]
+    }
+  }
+</code></pre>
 </section>
 
 ---
