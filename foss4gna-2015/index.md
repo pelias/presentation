@@ -126,6 +126,18 @@ transforms your current geographic location in to a list of places nearby
 
 ---
 
+<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/modular.png">
+  <h2>Pelias is modular! </h2>
+</section>
+
+---
+
+## Pelias Architecture
+
+![image](https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias_architecture.png)
+
+---
+
 ## Open datasets - Pelias importers
 
 - ***Openstreetmap*** 
