@@ -3,26 +3,113 @@
 
 ---
 
+# Geocoding
+
+Geocoding is the process of transforming input text, such as an address, or a name of a place—to a location on the earth's surface.
+
+![](https://github.com/pelias/pelias/raw/master/img/geocoding.gif)
+
+---
+
+# Reverse geocoding
+
+transforms your current geographic location in to a list of places nearby
+
+![](https://raw.githubusercontent.com/pelias/pelias/master/img/reverse.gif)
+
+---
+
+## Why is geocoding so important
+
+- useful for visualization 
+- mapping locations where events of interest occur
+- searching for an address/ routing
+- knowing where you are (reverse geocoders)
+
+---
+
+## State of open source geocoders
+
+- Not quiet there yet (relevancy and flexibilty)
+- Not all are data agnostic
+- Not all can support autocomplete
+- Not all have easy build process
+
+<aside class="notes">
+    Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+</aside>
+
+---
+
+<section>  
+  <h2>Geocoding is an art and a science</h2>
+  <ul>
+    <li>
+      <p><strong><em>What kind of geocoder are you building?</em></strong></p>
+      <ul>
+        <li>coarse? (neighborhoods ex: 'Mission')</li>
+        <li>address? (street addresses ex: '1 main st, new york')</li>
+        <li>poi (points of interest ex: 'golden gate bridge')</li>
+        <li>global? (all things combined)</li>
+      </ul>
+    </li>
+  </ul>
+  <aside class="notes">
+    Often times, data users are not well versed in the complexities of software and data essential to produce the best quality geocoder for their business needs. Here are some things to consider..
+  <aside>
+</section>
+
+<section>
+  <h2>Geocoding is a science and an art</h2>
+  <ul>
+    <li>
+      <p><strong><em>Know your data</em></strong></p>
+      <ul>
+        <li>What kind of addresses do you have?</li>
+        <li>is it consistent? </li>
+        <li>Issues? (missing parts of addresses)</li>
+      </ul>
+    </li>
+    <li>
+      <p><strong><em>Know your geocoder</em></strong></p>
+      <ul>
+        <li>Does it standardize data? </li>
+        <li>Relevancy and accuracy</li>
+        <li>Search Logic</li>
+        <li>Is it fast and secure?</li>
+      </ul>
+    </li>
+  </ul>
+  <aside class="notes">
+    [TALK] Data Issues <br/>
+    street/ buildings/ intersections?<br/><br/>two identical points from different sources: same lat/lon?<br/><br/>Some address can have missing hierarchies - for a given lat/lon, you may have street address but no neighborhood/city/state information is provided.<br/><br/>
+    Standardizing data is one way to make sure your address points have no missing information - this is typically done by a hierarchy lookup [TALK ABOUT admin-lookup]
+  </aside>
+</section>
+
+---
+
 ## Pelias
 
-- built with ***elasticsearch and node.js***
-- completely open-source and ***MIT licensed***
-- based on ***open-data***
-- You can ***install it locally*** and modify to suit your needs
-- supports ***fast autocomplete***
-- It's ***modular***
-- ***easy to install*** 
-- requires ***no external dependencies***
+- built with <span class="highlight">***elasticsearch and node.js***</span>
+- completely open-source and <span class="highlight">***MIT licensed***</span>
+- based on <span class="highlight">***open-data***</span> primarily but is <span class="highlight">***data agnostic***</span>
+- You can <span class="highlight">***install it locally***</span> and modify to suit your geocoding needs
+- supports <span class="highlight">***fast autocomplete***</span>
+- It's <span class="highlight">***modular***</span>
+- <span class="highlight">***easy to install***</span>
+- requires <span class="highlight">***no external dependencies***<span>
 
 ---
 
 ## architecture
 
 - ***elasticsearch***
-  - full text search
-  - completion suggester
+  - schema free, document oriented data store
+  - designed for horizontal scale
+  - full text search & autocomplete
+  - completion suggester, stored in memory at index time
   - geo capabilities
-  - sharding
 
 - ***nodejs***
   - streams
@@ -39,58 +126,57 @@
 
 ## Data in, Data out
 
-![image](https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias-diagram.png)
+![image](https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias_diagram.png)
 
 ---
 
-## Create an Elasticsearch Index
+## Open datasets - Pelias importers
 
-- Pelias Schema
-- ```npm install pelias-schema```
-- https://github.com/pelias/schema
-- Update the schema to your needs and then
-
-```javascript
-  node scripts/create_index.js;
-```
-
----
-
-## Open datasets used in Pelias
-
-- ***Geonames*** 
-  - ~9M pois; has population count, 2M US
-  - ***https://github.com/pelias/geonames***
 - ***Openstreetmap*** 
   - street addresses, poi & polygons
   - ***https://github.com/pelias/openstreetmap***
-- ***Quattroshapes*** 
-  - polygons; has foursquare checkins, Flickr data
-  - ***https://github.com/pelias/quattroshapes***
 - ***OpenAddresses*** 
   - more street addresses
   - ***https://github.com/pelias/openaddresses***
+- ***Quattroshapes*** 
+  - polygons; has foursquare checkins, Flickr data
+  - ***https://github.com/pelias/quattroshapes***
+- ***Geonames*** 
+  - ~9M pois; has population count, 2M US
+  - ***https://github.com/pelias/geonames***
 
 ---
 
-## Getting data into Elasticsearch
-
-- Pelias Data Model
-- Suggester Pipeline
-- Hierarchy lookup
-- Address Deduper
-- dbclient (elasticsearch)
-
----
-
-## Pelias Data Model 
-
-- ```npm install pelias-model```
-- https://github.com/pelias/model
-- convenient way of modelling POI and admin records 
-- so that they are compatible with the Pelias import pipeline
-
-```javascript
+<section>
+  <h2>Import Pipeline</h2>
+  <h5 class="highlight">Putting data into Elasticsearch</h5>
+  <ul>
+    <li>Create a ES index</li>
+    <li>Adhere to Pelias Data Model</li>
+    <li>Address Deduper</li>
+    <li>Hierarchy lookup</li>
+    <li>Suggester Pipeline</li>
+    <li>dbclient (elasticsearch)</li>
+  </ul>
+</section>
+<section>
+  <h2>Create a Pelias Index</h2>
+  <ul>
+    <li>Pelias Schema</li>
+    <li><code>npm install pelias-schema</code></li>
+    <li><a href="https://github.com/pelias/schema">https://github.com/pelias/schema</a></li>
+    <li>Update the schema to your needs and then</li>
+  </ul>
+  <pre><code class="javascript">          node scripts/create_index.js;</code></pre>
+</section>
+<section><h2>Pelias Data Model</h2>
+<ul>
+<li><code>npm install pelias-model</code></li>
+<li><a href="https://github.com/pelias/model">https://github.com/pelias/model</a></li>
+<li>convenient way of modelling POI and admin records </li>
+<li>so that they are compatible with the Pelias import pipeline</li>
+</ul>
+<pre><code class="javascript">
   var Document = require('pelias-model').Document;
 
   var poi = new Document( 'geoname', 1003 )
@@ -102,63 +188,56 @@
     .setAdmin( 'admin0', 'United States' )
     .setAdmin( 'neighborhood', 'East Village' )
     .setCentroid({ lon: -73.98, lat: 40.72 });
-```
-
----
-
-## Address Deduplicator
-
-- ```npm install pelias-address-deduplicator```
-- https://github.com/pelias/address-deduplicator
-- expects pelias/model Document objects
-- needs to be running across different data import pipelines
-- uses its own data store to figure out duplicates
-
----
-
-## Hierarchy Lookup
-
-- ```npm install pelias-admin-lookup```
-- https://github.com/pelias/admin-lookup
-- populates a dataset with country/state/county/neighborhood names (if missing)
-
-```javascript 
+</code></pre>
+</section>
+<section><h2>Address Deduplicator</h2>
+<ul>
+<li><code>npm install pelias-address-deduplicator</code></li>
+<li><a href="https://github.com/pelias/address-deduplicator">https://github.com/pelias/address-deduplicator</a></li>
+<li>expects pelias/model Document objects</li>
+<li>needs to be running across different data import pipelines</li>
+<li>uses its own data store to figure out duplicates</li>
+</ul>
+</section>
+<section><h2>Hierarchy Lookup</h2>
+<ul>
+<li><code>npm install pelias-admin-lookup</code></li>
+<li><a href="https://github.com/pelias/admin-lookup">https://github.com/pelias/admin-lookup</a></li>
+<li>populates a dataset with country/state/county/neighborhood names (if missing)</li>
+</ul>
+<pre><code class="javascript">
   var peliasAdminLookup = require( 'pelias-admin-lookup' );
 
-  var dataStream = /* some stream of Document objects */;
+  var dataStream = someStream; // some stream of Document objects
   peliasAdminLookup.stream( function( lookupStream ){
       dataStream
           .pipe( lookupStream )
-          .pipe( /* down the pelias pipeline */ );
+          .pipe( someStream );
   });
-```
-
----
-
-## Suggester pipeline
-
-- ```npm install pelias-suggester-pipeline```
-- https://github.com/pelias/suggester-pipeline
-- exports a transform stream that builds the suggester payload (```/suggest```)
-
-```javascript
+</code></pre>
+</section>
+<section><h2>Suggester pipeline</h2>
+<ul>
+<li><code>npm install pelias-suggester-pipeline</code></li>
+<li><a href="https://github.com/pelias/suggester-pipeline">https://github.com/pelias/suggester-pipeline</a></li>
+<li>exports a transform stream that builds the suggester payload (<code>/suggest</code>)</li>
+</ul>
+<pre><code class="javascript">
   var peliasSuggesterPipeline = require( 'pelias-suggester-pipeline' );
 
   someDocumentStream
     .pipe( peliasSuggesterPipeline.pipeline )
-    .pipe( /* rest of pelias pipeline */ );
-```
-
----
-
-## dbclient
-
-- ```npm install pelias-dbclient```
-- https://github.com/pelias/dbclient
-- Database client for pelias import pipelines
-- Last step in the import pipeline
-
-```javascript
+    .pipe( dataStream );
+</code></pre>
+</section>
+<section><h2>dbclient</h2>
+<ul>
+<li><code>npm install pelias-dbclient</code></li>
+<li><a href="https://github.com/pelias/dbclient">https://github.com/pelias/dbclient</a></li>
+<li>Database client for pelias import pipelines</li>
+<li>Last step in the import pipeline</li>
+</ul>
+<pre><code class="javascript">
   module.exports = function( filename ){
     resolvers.selectSource( filename )
       .pipe( geonames.pipeline )
@@ -166,22 +245,14 @@
       .pipe( suggester.pipeline )
       .pipe( dbclient );
   };
-
-```
-
----
-
-## How to build a local Geocoder
-
-#### without jumping too many hoops
-***https://github.com/pelias/vagrant***
-***https://mapzen.com/blog/pelias-setup-tutorial***
+</code></pre>
+</section>
 
 ---
 
 ## Getting data out of Elasticsearch
 
-- Queries
+- Search Logic
 - API
 
 ---
@@ -197,19 +268,47 @@
 
 ---
 
+## Search Logic
+
+- ***population***
+  - portland, oregon > portland, maine
+- ***popularity***
+  - times square, new york > times square, south dakota
+- ***pop score*** of admin area it belongs to
+  - 123 main st, san francisco > 123 main st, pawnee
+- ***geo bias*** - lat/lon/bbox to sort the results.
+  - soho, new york > soho, london (if searching from new york)
+- ***boosting*** certain admin values (***admin0*** - countries)
+  - china > chinatown
+- ***mixing*** popular locations in the search results regardless of where you are 
+
+<aside class="notes">
+no search logic thats dependent on dataset (search logic has to be generic when you are working with a geocoder thats input dataset agnostic)
+</aside>
+
+---
+
 ## API
 
 - endpoints
-  - /search
-  - /suggest
-  - /reverse
-  - /doc
+  - ***/search***
+  - ***/suggest***
+  - ***/reverse***
+  - ***/doc***
 - params
-  - ?input=
-  - ?lat=&lon=
-  - ?bbox=
-  - ?size=
-  - ?layers=
+  - ***?input=***
+  - ***?lat=&lon=***
+  - ***?bbox=***
+  - ***?size=***
+  - ***?layers=***
+
+---
+
+## How to build a local Geocoder
+
+#### without jumping too many hoops
+***https://github.com/pelias/vagrant***
+***https://mapzen.com/blog/pelias-setup-tutorial***
 
 ---
 
@@ -222,3 +321,7 @@
 - postcode finder
 - autocomplete airports for flight search
 - correct postal addresses
+
+<style>
+ .highlight, .reveal em{color:#13daec}
+</style>
