@@ -163,7 +163,7 @@ transforms your current geographic location in to a list of places nearby
 
 ---
 
-<section>
+<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias-vert-1.png">
   <h2>Import Pipeline</h2>
   <h5 class="highlight">Putting data into Elasticsearch</h5>
   <ul>
@@ -175,7 +175,7 @@ transforms your current geographic location in to a list of places nearby
     <li>dbclient (elasticsearch)</li>
   </ul>
 </section>
-<section>
+<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias-vert-1.png">
   <h2>Create a Pelias Index</h2>
   <ul>
     <li>Pelias Schema</li>
@@ -392,6 +392,12 @@ no search logic thats dependent on dataset (search logic has to be generic when 
 - All our main stories/issues are opened here<br/><br/>
 - Get involved, Join the conversation at
 </aside>
+
+---
+
+<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/foss4g_evaluation.png">
+</section>
+
 <style>
  .highlight, .reveal em{color:#13daec}
 </style>
