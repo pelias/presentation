@@ -32,7 +32,7 @@ transforms your current geographic location in to a list of places nearby
 
 ## State of open source geocoders
 
-- Not quiet there yet (relevancy and flexibilty)
+- Not quite there yet (relevancy and flexibilty)
 - Not all are data agnostic
 - Not all can support autocomplete
 - Not all have easy build process
@@ -91,10 +91,10 @@ transforms your current geographic location in to a list of places nearby
 
 - built with ***elasticsearch and node.js***
 - completely open-source and ***MIT licensed***
-- based on ***open-data*** primarily but it is ***data agnostic***
+- based on ***open data*** primarily but it is ***data agnostic***
 - ***install it locally*** and modify to suit your geocoding needs
 - supports ***fast autocomplete***
-- It's ***modular***
+- it's ***modular***
 - ***easy to install***
 - requires ***no external dependencies***
 
@@ -103,9 +103,9 @@ transforms your current geographic location in to a list of places nearby
 ## architecture
 
 - ***elasticsearch***
-  - schema free, document oriented data store
+  - schema free, document-oriented data store
   - designed for horizontal scale
-  - full text search & autocomplete
+  - full-text search & autocomplete
   - completion suggester, stored in memory at index time
   - geo capabilities
 
@@ -130,7 +130,7 @@ transforms your current geographic location in to a list of places nearby
 
 ## Open datasets - Pelias importers
 
-- ***Openstreetmap*** 
+- ***OpenStreetMap*** 
   - street addresses, poi & polygons
   - ***https://github.com/pelias/openstreetmap***
 - ***OpenAddresses*** 
