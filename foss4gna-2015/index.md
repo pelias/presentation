@@ -373,7 +373,7 @@ no search logic thats dependent on dataset (search logic has to be generic when 
 
 ## How to build a local Geocoder
 
-#### without jumping too many hoops
+#### without jumping through too many hoops
 ***https://github.com/pelias/vagrant***
 ***https://mapzen.com/blog/pelias-setup-tutorial***
 
