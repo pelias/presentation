@@ -47,7 +47,7 @@ transforms your current geographic location in to a list of places nearby
       <ul>
         <li>coarse? (neighborhoods ex: 'Mission')</li>
         <li>address? (street addresses ex: '1 main st, new york')</li>
-        <li>poi (points of interest ex: 'golden gate bridge')</li>
+        <li>poi? (points of interest ex: 'golden gate bridge')</li>
         <li>global? (all things combined)</li>
       </ul>
     </li>
@@ -132,16 +132,16 @@ transforms your current geographic location in to a list of places nearby
 
 - ***OpenStreetMap*** 
   - street addresses, poi & polygons
-  - ***https://github.com/pelias/openstreetmap***
+  - https://github.com/pelias/openstreetmap
 - ***OpenAddresses*** 
   - more street addresses
-  - ***https://github.com/pelias/openaddresses***
+  - https://github.com/pelias/openaddresses
 - ***Quattroshapes*** 
   - polygons; has foursquare checkins, Flickr data
-  - ***https://github.com/pelias/quattroshapes***
+  - https://github.com/pelias/quattroshapes-pipeline
 - ***Geonames*** 
   - ~9M pois; has population count, 2M US
-  - ***https://github.com/pelias/geonames***
+  - https://github.com/pelias/geonames
 
 ---
 
@@ -395,8 +395,7 @@ no search logic thats dependent on dataset (search logic has to be generic when 
 
 ---
 
-<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/foss4g_evaluation.png">
-</section>
+![image](https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/foss4g_evaluation.png)
 
 <style>
  .highlight, .reveal em{color:#13daec}
