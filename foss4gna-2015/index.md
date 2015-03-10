@@ -383,6 +383,8 @@ no search logic thats dependent on dataset (search logic has to be generic when 
 
 ***https://github.com/pelias/pelias/issues***
 
+![image](https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias-issues.png)
+
 <aside class="notes">
 - We would love to work with you<br/><br/>
 - Have a unique dataset? Write a pelias importer!<br/><br/>
