@@ -3,6 +3,9 @@
 
 ### An open source geocoder built with elasticsearch and node.js
 
+![image](https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/mapzen.png)
+
+
 ---
 
 # Geocoding
