@@ -2,7 +2,7 @@
 # Pelias
 
 ### An open source geocoder built with elasticsearch and node.js
-<img class="custom" src="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/mapzen.png" />
+<img class="custom" src="https://raw.githubusercontent.com/pelias/presentation/master/foss4gna-2015/mapzen.png" />
 
 ---
 
@@ -96,9 +96,9 @@ transforms your current geographic location in to a list of places nearby
     </li>
   </ul>
   <aside class="notes">
-    [TALK] Data Issues <br/>
-    street/ buildings/ intersections?<br/><br/>two identical points from different sources: same lat/lon?<br/><br/>Some address can have missing hierarchies - for a given lat/lon, you may have street address but no neighborhood/city/state information is provided.<br/><br/>
-    Standardizing data is one way to make sure your address points have no missing information - this is typically done by a hierarchy lookup [TALK ABOUT admin-lookup]
+    [TALK] street/ buildings/ intersections?<br/><br/>two identical points from different sources: same lat/lon?<br/><br/>
+    Standardizing data is one way to make sure your address points have no missing information - this is typically done by a hierarchy lookup [TALK ABOUT admin-lookup]<br/><br/>
+    Complete consistent data makes a better geocoder 
   </aside>
 </section>
 
@@ -179,7 +179,7 @@ transforms your current geographic location in to a list of places nearby
 
 ## Data in, Data out
 
-![image](https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias_diagram.png)
+![image](https://raw.githubusercontent.com/pelias/presentation/master/foss4gna-2015/pelias_diagram.png)
 
 <aside class="notes">
   Every geocoder has two main components - a way to put data into a data store and a way to retrieve data out smartly.<br/>
@@ -212,7 +212,7 @@ transforms your current geographic location in to a list of places nearby
 
 ---
 
-<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/modular.jpeg">
+<section data-background="https://raw.githubusercontent.com/pelias/presentation/master/foss4gna-2015/modular.jpeg">
   <h1>Pelias is modular! </h1>
 </section>
 
@@ -220,7 +220,7 @@ transforms your current geographic location in to a list of places nearby
 
 ## Pelias Architecture
 
-![image](https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias_architecture.png)
+![image](https://raw.githubusercontent.com/pelias/presentation/master/foss4gna-2015/pelias_architecture.png)
 
 <aside class="notes">
   This is sort of a detailed look at the import pipeline and the API
@@ -230,7 +230,7 @@ transforms your current geographic location in to a list of places nearby
 
 ## Data flow 
 
-<img class="custom" src="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias_architecture_2.png" height="600"/>
+<img class="custom" src="https://raw.githubusercontent.com/pelias/presentation/master/foss4gna-2015/pelias_architecture_2.png" height="600"/>
 
 <aside class="notes">
   Using nodejs streams, its easy to pipe data through various modules before going into elasticsearch
@@ -238,7 +238,7 @@ transforms your current geographic location in to a list of places nearby
 
 ---
 
-<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias-vert-1.png">
+<section data-background="https://raw.githubusercontent.com/pelias/presentation/master/foss4gna-2015/pelias-vert-1.png">
   <h2>Import Pipeline</h2>
   <h5 class="highlight">Putting data into Elasticsearch</h5>
   <ul>
@@ -250,7 +250,7 @@ transforms your current geographic location in to a list of places nearby
     <li>dbclient (elasticsearch)</li>
   </ul>
 </section>
-<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias-vert-1.png">
+<section data-background="https://raw.githubusercontent.com/pelias/presentation/master/foss4gna-2015/pelias-vert-1.png">
   <h2>Create a Pelias Index</h2>
   <ul>
     <li>Pelias Schema</li>
@@ -260,11 +260,12 @@ transforms your current geographic location in to a list of places nearby
   </ul>
   <pre><code class="javascript">          node scripts/create_index.js;</code></pre>
   <aside class="notes">
+    Elasticsearch Index is like a table in a traditional database<br/><br/>
     It contains all the required mappings that elasticsearch expects when you create an index along with settings such as number of shards, replicas and the kind of analysis you want to perform on various fields including synonym expansion (st -> street)
   </aside>
 
 </section>
-<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/model.png"><h2>Pelias Data Model</h2>
+<section data-background="https://raw.githubusercontent.com/pelias/presentation/master/foss4gna-2015/model.png"><h2>Pelias Data Model</h2>
 <ul>
 <li><code>npm install pelias-model</code></li>
 <li><a href="https://github.com/pelias/model">https://github.com/pelias/model</a></li>
@@ -274,23 +275,25 @@ transforms your current geographic location in to a list of places nearby
 <pre><code class="javascript">
   var Document = require('pelias-model').Document;
 
-  var poi = new Document( 'geoname', 1003 )
+  var poi = new Document( 'way', 23871270 )
     .setAlpha3( 'USA' )
     .setMeta( 'author', 'harish' )
     .setMeta( 'date', new Date().getTime() )
-    .setName( 'default', 'the immigrant' )
-    .setName( 'alt', 'The Immigrant' )
+    .setName( 'default', 'Mission Dolores Park' )
+    .setName( 'alternative', 'Dolores Park' )
     .setAdmin( 'admin0', 'United States' )
-    .setAdmin( 'neighborhood', 'East Village' )
-    .setCentroid({ lon: -73.98, lat: 40.72 });
+    .setAdmin( 'admin1', 'California' )
+    .setAdmin( 'admin2', 'San Francisco' )
+    .setAdmin( 'neighborhood', 'Mission District' )
+    .setCentroid({ lon: -122.427111, lat: 37.759755 });
 </code></pre>
-
+ 
 <aside class="notes">
   This module deals with creating a document for the given point - it has nice setters/getters to neatly add name, lat/lon and any other additional information to the document.
 </aside>
 
 </section>
-<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/deduper.png"><h2>Address Deduplicator</h2>
+<section data-background="https://raw.githubusercontent.com/pelias/presentation/master/foss4gna-2015/deduper.png"><h2>Address Deduplicator</h2>
 <ul>
 <li><code>npm install pelias-address-deduplicator</code></li>
 <li><a href="https://github.com/pelias/address-deduplicator">https://github.com/pelias/address-deduplicator</a></li>
@@ -302,7 +305,7 @@ transforms your current geographic location in to a list of places nearby
   This is a big one. If we use more than one dataset, often times you will run into duplicates (yankee stadium appears in OSM and geonames) - this module deals with consolidating duplicates and adding any additional information from other sources as a meta tag in the original document.
 </aside>
 </section>
-<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/hierarchy.png"><h2>Hierarchy Lookup</h2>
+<section data-background="https://raw.githubusercontent.com/pelias/presentation/master/foss4gna-2015/hierarchy.png"><h2>Hierarchy Lookup</h2>
 <ul>
 <li><code>npm install pelias-admin-lookup</code></li>
 <li><a href="https://github.com/pelias/admin-lookup">https://github.com/pelias/admin-lookup</a></li>
@@ -323,7 +326,7 @@ transforms your current geographic location in to a list of places nearby
   This module ensures that your data is complete by looking up the given point and sort of reverse geocoding and assigning neighborhood/state/country values.
 </aside>
 </section>
-<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/suggester.png"><h2>Suggester pipeline</h2>
+<section data-background="https://raw.githubusercontent.com/pelias/presentation/master/foss4gna-2015/suggester.png"><h2>Suggester pipeline</h2>
 <ul>
 <li><code>npm install pelias-suggester-pipeline</code></li>
 <li><a href="https://github.com/pelias/suggester-pipeline">https://github.com/pelias/suggester-pipeline</a></li>
@@ -340,7 +343,7 @@ transforms your current geographic location in to a list of places nearby
   Since we use the suggester for autocomplete, this module builds the payload - its just telling elasticsearch that when a user starts typing any of the inputs listed in the payload, refer it to this given point.
 </aside>
 </section>
-<section data-background="https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/dbclient.png"><h2>dbclient</h2>
+<section data-background="https://raw.githubusercontent.com/pelias/presentation/master/foss4gna-2015/dbclient.png"><h2>dbclient</h2>
 <ul>
 <li><code>npm install pelias-dbclient</code></li>
 <li><a href="https://github.com/pelias/dbclient">https://github.com/pelias/dbclient</a></li>
@@ -421,6 +424,10 @@ no search logic thats dependent on dataset (search logic has to be generic when 
 </ul>
 </section>
 
+<section><h2>API Documentation</h2>
+***https://github.com/pelias/api/wiki/API-Endpoints***
+</section>
+
 <!-- <section><h2>API Issues</h2>
 <ul>
 <li>Context suggester doesn't work without location information</li>
@@ -485,7 +492,7 @@ no search logic thats dependent on dataset (search logic has to be generic when 
 
 ## github.com/pelias
 
-![image](https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/github-pelias.png)
+![image](https://raw.githubusercontent.com/pelias/presentation/master/foss4gna-2015/github-pelias.png)
 
 ---
 
@@ -493,15 +500,16 @@ no search logic thats dependent on dataset (search logic has to be generic when 
 
 ***https://github.com/pelias/pelias/issues***
 
-![image](https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/pelias-issues.png)
+![image](https://raw.githubusercontent.com/pelias/presentation/master/foss4gna-2015/pelias-issues.png)
 
 <aside class="notes">
-- We would love to work with you<br/><br/>
-- Have a unique dataset? Write a pelias importer!<br/><br/>
-- Open an issue, contribute on an existing issue<br/><br/>
-- Discuss on topics like 'street intersections, NLP etc' <br/><br/>
-- Review our code, comment on our pull requests<br/><br/>
-- All our main stories/issues are opened here<br/><br/>
+- We would love to work with you<br/>
+- Have a unique dataset? Write a pelias importer!<br/>
+- or tell us about the dataset and we'll help you write an importer<br/>
+- Open an issue, contribute on an existing issue<br/>
+- Discuss on topics like 'street intersections, NLP etc' <br/>
+- Review our code, comment on our pull requests<br/>
+- All our main stories/issues are opened here<br/>
 - Get involved, Join the conversation at
 </aside>
 
@@ -519,7 +527,7 @@ no search logic thats dependent on dataset (search logic has to be generic when 
 
 ---
 
-![image](https://raw.githubusercontent.com/pelias/presentation/foss4gna-2015/foss4gna-2015/foss4g_evaluation.png)
+![image](https://raw.githubusercontent.com/pelias/presentation/master/foss4gna-2015/foss4g_evaluation.png)
 
 <style>
  .highlight, .reveal em{color:#13daec}
