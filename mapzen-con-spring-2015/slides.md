@@ -96,11 +96,11 @@ Note to team: the following are the points we wanted to discuss:
 
 ---
 
-<section data-background="CountryPolygons.png"/>
+<section data-background="https://raw.githubusercontent.com/pelias/presentation/master/mapzen-con-spring-2015/CountryPolygons.png"/>
 
 ---
 
-<section data-background="USStatesPolygons.png"/>
+<section data-background="https://raw.githubusercontent.com/pelias/presentation/master/mapzen-con-spring-2015/USStatesPolygons.png"/>
 
 ---
 
