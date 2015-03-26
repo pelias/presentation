@@ -93,6 +93,37 @@ Note to team: the following are the points we wanted to discuss:
 
 ---
 
+### State
+### Quality
+### Synergy
+
+---
+
+## State
+
+* Faster Imports
+* Optional Geobias
+* Smarter Scoring
+* Better Documentation
+
+---
+
+## Quality
+
+* Data Quality
+* Search Quality
+* Feedback
+
+---
+
+##Synergy
+
+* Community Outreach
+* Conference talks
+* Sending Mail
+
+---
+
 <section data-background="https://s-media-cache-ak0.pinimg.com/originals/48/a1/c9/48a1c9d12ad1b9d98a055bb49a90bf4e.jpg">
 <h3 align="right" style="color:black">building fences</h3>
 </section>
