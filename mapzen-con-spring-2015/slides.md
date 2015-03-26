@@ -2,6 +2,15 @@
 	.reveal section img {
 		border-style: none;
 	}
+
+	.reveal {
+		background-color: white;
+		color: black;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		color: #d4645c !important;
+	}
 </style>
 
 # Pelias
