@@ -199,12 +199,12 @@
 ---
 
 <section data-background="https://s-media-cache-ak0.pinimg.com/originals/48/a1/c9/48a1c9d12ad1b9d98a055bb49a90bf4e.jpg">
-<h3 align="right" style="color:black">building fences</h3>
+<h3 align="right">building fences</h3>
 </section>
 
 ---
 
-### <font style="color:orange">fences?</font>
+### fences?
 
  * administrative boundaries
   * countries, states, provinces, cities, counties, boroughs, townships, neighborhoods, etc.
@@ -212,7 +212,7 @@
 
 ---
 
-### <font style="color:orange">where can i get some?</font>
+### where can i get some?
 
 ![](https://s-media-cache-ak0.pinimg.com/originals/e8/13/8a/e8138a20463874a0db75dcd8a8890b6b.jpg)
 
@@ -224,8 +224,8 @@
 
 ---
 
-### <font style="color:orange">good news</font>
-#### <font style="color:orange;weight:ul"><u>openstreetmap</u></font> has boundaries
+### good news
+#### <u>openstreetmap</u> has boundaries
 
 <font size="5"><i>...along with ~gazillion other things, so good luck with that<i/></font>
 
@@ -233,7 +233,7 @@
 
  * all relations with the following tags
 
-| <font style="color:orange">key | <font style="color:orange">value |
+| <font style="color:#d4645c">key | <font style="color:#d4645c">value |
 | - |
 | boundary | <i>administrative |
 | admin_level | <i>1-11 |
@@ -254,7 +254,7 @@
 
 ---
 
-### <font style="color:orange">master plan</font>
+### master plan
 
  * <font style="color:green">&#10004;</font> naive extract
  * <font style="color:green">&#10004;</font> expose problematic data to encourage improvements
@@ -264,7 +264,7 @@
 
 ----
 
-#### <font style="color:orange">work in progress</font>
+#### work in progress
 
  * build front-end for downloads
  * scrub and normalize data
