@@ -13,17 +13,98 @@
 	}
 </style>
 
-# Pelias
+# Search
+
+![search](http://creativeoverflow.net/wp-content/uploads/2012/10/26-31-sexy-search-boxes.png)
 
 ---
 
-Note to team: the following are the points we wanted to discuss:
+![old school](http://www.toplessrobot.com/2-searching.jpg)
 
-1. Intro / Problem overview / Challenges (10 minutes) (PeliasPete)
-2. High-level overview of solutions / Current initiatives (10 minutes) (PeliasPete)
-3. Year in review (improvements) (5 minutes) (Severyn)
-4. API (10 minutes) (harish)
-5. Feedback tool / Demos (10 minutes) (harish)
+---
+
+![90s](http://www.everfunny.com/wp-content/uploads/2013/02/1990s-problem.jpg)
+
+---
+
+![databases](https://www.drupal.org/files/images/tsort_table_example.png)
+
+---
+
+![ui](http://cdn.mashable.com/wp-content/uploads/2010/08/BrowserElements.jpg)
+
+---
+
+![ui2](http://blog.canto.com/wp-content/uploads/2015/02/query1neu.jpg)
+
+---
+
+![query](http://rlv.zcache.com/sql_pub_time_t_shirts-re820e7150b85428780800345868f8e43_804gs_1024.jpg)
+
+---
+
+![query2](http://www.first8.nl/wp-content/uploads/2014/05/Screen-Shot-2014-05-13-at-16.29.png)
+
+---
+
+![human](http://static.fjcdn.com/pictures/Google+hacks+here+s+a+cheat+sheet+to+help+you+google_c857be_4992885.jpg)
+
+---
+
+![predictive](http://cdn.smosh.com/sites/default/files/bloguploads/google-search-suggestions-1.jpg)
+
+---
+
+![pizza](http://www.yext.com/blog/wp-content/uploads/2012/06/pizza-yelp.png)
+
+---
+
+## humanizing information retrieval
+
+---
+
+## design considerations
+
+![design](https://navigatingdaedaluslabyrinth.files.wordpress.com/2013/02/01_misaligned_bridge_503.jpg)
+
+---
+
+### differentiation
+
+- It's completely open-source and MIT licensed
+- It's based on open-data, so you can run it yourself
+- You can install it locally and modify to suit your needs
+- It has an impressive list of features, such as **fast autocomplete**
+- It's modular, so you don't need to be an expert to make changes
+- It's easy to install and requires no external dependencies
+- We run a continuous deployment cycle with a new version shipping weekly
+
+---
+
+### goals
+
+- Provide accurate search results
+- Give users query suggestions (typeahead in the search box)
+- Account for location bias (places nearer to you appear higher in the results)
+- Support multiple data sources (OSM, geonames, quattroshapes etc)
+- Flexible software architecture
+- Easy to contribute software patches and features to
+- Easy to set-up and configure your own instance
+- No external dependencies (such as postgres)
+- Reliable, configurable & fast import process
+- Work equally well for a small city and the entire planet
+
+---
+
+## tasks
+
+- importing data
+- intuitive query logic / API
+- administrative polygons
+- postal addresses
+- normalization / de-duplication
+- natural language
+- developer relations / feedback
 
 ---
 
@@ -86,13 +167,6 @@ Note to team: the following are the points we wanted to discuss:
 
 ---
 
-### improvements: search
-
-- increased adminstrative-level name accuracy
-
-
----
-
 ### State
 ### Quality
 ### Synergy
@@ -125,12 +199,12 @@ Note to team: the following are the points we wanted to discuss:
 ---
 
 <section data-background="https://s-media-cache-ak0.pinimg.com/originals/48/a1/c9/48a1c9d12ad1b9d98a055bb49a90bf4e.jpg">
-<h3 align="right" style="color:black">building fences</h3>
+<h3 align="right">building fences</h3>
 </section>
 
 ---
 
-### <font style="color:orange">fences?</font>
+### fences?
 
  * administrative boundaries
   * countries, states, provinces, cities, counties, boroughs, townships, neighborhoods, etc.
@@ -138,7 +212,7 @@ Note to team: the following are the points we wanted to discuss:
 
 ---
 
-### <font style="color:orange">where can i get some?</font>
+### where can i get some?
 
 ![](https://s-media-cache-ak0.pinimg.com/originals/e8/13/8a/e8138a20463874a0db75dcd8a8890b6b.jpg)
 
@@ -150,8 +224,8 @@ Note to team: the following are the points we wanted to discuss:
 
 ---
 
-### <font style="color:orange">good news</font>
-#### <font style="color:orange;weight:ul"><u>openstreetmap</u></font> has boundaries
+### good news
+#### <u>openstreetmap</u> has boundaries
 
 <font size="5"><i>...along with ~gazillion other things, so good luck with that<i/></font>
 
@@ -159,7 +233,7 @@ Note to team: the following are the points we wanted to discuss:
 
  * all relations with the following tags
 
-| <font style="color:orange">key | <font style="color:orange">value |
+| <font style="color:#d4645c">key | <font style="color:#d4645c">value |
 | - |
 | boundary | <i>administrative |
 | admin_level | <i>1-11 |
@@ -180,7 +254,7 @@ Note to team: the following are the points we wanted to discuss:
 
 ---
 
-### <font style="color:orange">master plan</font>
+### master plan
 
  * <font style="color:green">&#10004;</font> naive extract
  * <font style="color:green">&#10004;</font> expose problematic data to encourage improvements
@@ -190,7 +264,7 @@ Note to team: the following are the points we wanted to discuss:
 
 ----
 
-#### <font style="color:orange">work in progress</font>
+#### work in progress
 
  * build front-end for downloads
  * scrub and normalize data
