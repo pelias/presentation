@@ -2,6 +2,15 @@
 	.reveal section img {
 		border-style: none;
 	}
+
+	.reveal {
+		background-color: white;
+		color: black;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		color: #d4645c !important;
+	}
 </style>
 
 # Pelias
@@ -81,6 +90,37 @@ Note to team: the following are the points we wanted to discuss:
 
 - increased adminstrative-level name accuracy
 
+
+---
+
+### State
+### Quality
+### Synergy
+
+---
+
+## State
+
+* Faster Imports
+* Optional Geobias
+* Smarter Scoring
+* Better Documentation
+
+---
+
+## Quality
+
+* Data Quality
+* Search Quality
+* Feedback
+
+---
+
+##Synergy
+
+* Community Outreach
+* Conference talks
+* Sending Mail
 
 ---
 
