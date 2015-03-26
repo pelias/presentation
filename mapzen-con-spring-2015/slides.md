@@ -18,7 +18,28 @@ Note to team: the following are the points we wanted to discuss:
 
 ---
 
+### improvements
+
+- Pelias has seen lots of import/API improvements
+- import pipelines
+  - preprocess and ingest data
+  - OpenAddresses, OSM, Geonames, Quattroshapes
+- API
+  - queries elasticsearch
+  - controls results composition, search logic
+
+---
+
 ### improvements: imports
+
+- defining and ironing out our workflow
+  - faster imports
+  - build environments
+  - acceptance tests
+
+---
+
+### import speed
 
 - decreased import time from a month to 30 hours
   - 144m POIs/addresses (Geonames, OSM, OpenAddresses)
@@ -26,18 +47,33 @@ Note to team: the following are the points we wanted to discuss:
 
 ---
 
-### improvements: pelias-dashboard
+### build environments
 
-- set up *dev*/*staging* environments
+- *dev*/*staging* environments
 - increased import automation
 ![](https://cloud.githubusercontent.com/assets/4467604/6786599/c805a04e-d163-11e4-9bac-d258a5dc3491.png)
 
 ---
 
-### improvements: acceptance-tests
+### acceptance-tests
 
 - introduced acceptance-tests (228 test-cases)
 ![](https://cloud.githubusercontent.com/assets/4467604/6786634/f7db1178-d163-11e4-894b-a3bc19ff81fb.png)
+
+---
+
+### workflow
+
+- identify new features to work on
+  - create test cases that we expect to pass
+  - implement features in branches
+- test features locally
+- graduate to a dev import
+- run tests for dev
+- graduate to a staging import
+- run tests for staging
+- switch staging over to production
+- merge branches, close issues, move on
 
 ---
 
