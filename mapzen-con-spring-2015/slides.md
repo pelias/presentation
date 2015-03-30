@@ -167,6 +167,8 @@
 
 ---
 
+## API
+
 ### State
 ### Quality
 ### Synergy
@@ -211,9 +213,9 @@
 * Sending Mail
 
 <aside class="notes">
-  Community: Maptime, GeoNYC, nodejs, elasticsearch meetups
-  Talks: Foss4G, SOTM etc
-  Sending mail: boostrap/backbone/leaflet plugin, colloborating with other teams etc
+  - Community: Maptime, GeoNYC, nodejs, elasticsearch meetups
+  - Talks: Foss4G, SOTM etc
+  - Sending mail: boostrap/backbone/leaflet plugin, colloborating with other teams etc
 </aside>
 
 ---
