@@ -180,6 +180,14 @@
 * Smarter Scoring
 * Better Documentation
 
+<aside class="notes">
+  - Full planet Import time: 30 days -> 1+ week -> 30 hours
+  - Scoring: Static (population, popularity, weights, category)
+  - Scoring: Dynamic (geodistance)
+  - Doc: Release Notes, Wiki
+  - Next: Address parser, NLP, street interpolation
+</aside>
+
 ---
 
 ## Quality
@@ -188,6 +196,12 @@
 * Search Quality
 * Feedback
 
+<aside class="notes">
+  - Data: Completion, consistent, timely
+  - Search: relevant, admin-lookup, dedup
+  - Feedback Example: Florence, IT vs Florence, South Carolina
+</aside>
+
 ---
 
 ##Synergy
@@ -195,6 +209,12 @@
 * Community Outreach
 * Conference talks
 * Sending Mail
+
+<aside class="notes">
+  Community: Maptime, GeoNYC, nodejs, elasticsearch meetups
+  Talks: Foss4G, SOTM etc
+  Sending mail: boostrap/backbone/leaflet plugin, colloborating with other teams etc
+</aside>
 
 ---
 
