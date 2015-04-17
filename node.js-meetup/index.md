@@ -108,6 +108,7 @@ any self-respecting geocoder should support
  - NLP
  - autocomplete
  - categories
+ - localization
  - coarse lookup
  - reverse lookup
  - detailed | simple result
@@ -254,3 +255,8 @@ NOTE:
  - hard to do everything in github
 - building a community around a project
 - building a highly customizable architecture to support everyone's needs
+
+---
+
+### the end
+
