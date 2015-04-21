@@ -97,9 +97,21 @@ NOTE:http://bites.goodeggs.com/posts/export-this/
 ## Streams | Node.js
 
 * ***unix pipes*** - read data from a source & pipe it to a destination
-* stream is an ***```EventEmitter```***
 * `readable`, `writable`, `transform`, `duplex` or `classic`
-* for ex: HTTP server's ***request*** is a readable stream, ***response*** is writable
+* ex: HTTP server's ***request*** is a readable stream, ***response*** is writable
+
+```shell
+$ a | b | c | d
+```
+
+<small>can be written using node.js streams as</small>
+
+```javascript
+a.pipe(b);
+b.pipe(c);
+c.pipe(d);
+```
+
 
 NOTE: Whenever a stream has a "data" listener registered, it switches into "classic" mode and behaves according to the old API (node 0.4).
 
@@ -113,7 +125,7 @@ var geonames = require('geonames-stream'),
 
 // wget http://download.geonames.org/export/dump/US.zip
 fs.createReadStream( 'US.zip' )
-  .pipe( geonames.pipeline ); // parse, extract req fields
+  .pipe( geonames.pipeline ); // parse CSV, extract req fields
 ```
 
 * ***geonames.pipeline*** is a transform stream
@@ -141,7 +153,7 @@ fs.createReadStream( 'US.zip' )
 * when data is written to a writable stream it returns true/false
 * true: _cool, keep em coming_
 * false: _Uh-oh, I'm backed up - wait for 'drain' event_
-* back pressure
+* handles back pressure
 
 NOTE: This is a form of back pressure which is a very powerful feature as it lets stream communicate "upstream" to their writers. Most of the back pressure related APIs are advisory so there is sort of a gentlemens agreement to honor requests to start or stop writing as timely as possible.
 
@@ -190,7 +202,7 @@ request.get( 'http://download.geonames.org/export/dump/US.zip' )
 * can lead to too many packages
 * tangled dependencies
 * visualizing multiple packages
-* pelias has 29 modules
+* pelias has around [30 modules](https://github.com/pelias/pelias/blob/master/package_outline.md)
 
 ----
 
@@ -272,13 +284,11 @@ NOTE:
 
 <aside class="notes">
 - We would love to work with you<br/>
-- Have a unique dataset? Write a pelias importer!<br/>
-- or tell us about the dataset and we'll help you write an importer<br/>
 - Open an issue, contribute on an existing issue<br/>
 - Discuss on topics like 'street intersections, NLP etc' <br/>
 - Review our code, comment on our pull requests<br/>
 - All our main stories/issues are opened here<br/>
-- Get involved, Join the conversation at
+- Get involved, Join the conversation
 </aside>
 
 ---
