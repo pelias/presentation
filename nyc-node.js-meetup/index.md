@@ -98,8 +98,10 @@ NOTE:http://bites.goodeggs.com/posts/export-this/
 
 * ***unix pipes*** - read data from a source & pipe it to a destination
 * stream is an ***```EventEmitter```***
-* stream can be readable, writable or both
+* `readable`, `writable`, `transform`, `duplex` or `classic`
 * for ex: HTTP server's ***request*** is a readable stream, ***response*** is writable
+
+NOTE: Whenever a stream has a "data" listener registered, it switches into "classic" mode and behaves according to the old API (node 0.4).
 
 ----
 
@@ -111,10 +113,13 @@ var geonames = require('geonames-stream'),
 
 // wget http://download.geonames.org/export/dump/US.zip
 fs.createReadStream( 'US.zip' )
-  .pipe( geonames.pipeline );
+  .pipe( geonames.pipeline ); // parse, extract req fields
 ```
 
-***geonames.pipeline*** listens to ***data*** event and attaches a callback.
+* ***geonames.pipeline*** is a transform stream
+* it pushes data on to the `Readable` stream
+* when data is available, ***`readable`*** event fires
+* ***`.read()`*** to fetch data from the buffer
 
 NOTE: When a chunk of data is available, the readable stream emits a data event and your callback executes
 
@@ -132,7 +137,7 @@ fs.createReadStream( 'US.zip' )
   .pipe( dbclient );
 ```
 
-* implements ***write*** and ***end*** functions
+* uses ***write*** and ***end*** functions
 * when data is written to a writable stream it returns true/false
 * true: _cool, keep em coming_
 * false: _Uh-oh, I'm backed up - wait for 'drain' event_
@@ -282,11 +287,13 @@ NOTE:
 
 ***Harish Krishna***
 
-***harish@mapzen.com***
+***[harish@mapzen.com](mailto:harish@mapzen.com)***
 
-***@harizh***
+***[github.com/hkrishna](https://github.com/hkrishna)***
 
-<p style="margin-top:80px">Slides: <em>https://github.com/pelias/presentation</em></p>
+***[twitter: @harizh](https://twitter.com/harizh)***
+
+<p style="margin-top:80px">Slides: <em>[github.com/pelias/presentation](https://github.com/pelias/presentation)</em></p>
 
 <style>
 	.reveal section img {
