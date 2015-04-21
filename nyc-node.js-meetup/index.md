@@ -83,14 +83,20 @@ NOTE:
 
 ## Modular | Node.js
 
-* require, exports and module.exports
-* Export a Namespace
-* Export a Function
-* Export a Higher Order Function
-* Export a Constructor
-* Export a Singleton
+* require, exports, module.exports
+* common design patterns in pelias
+	* export a namespace
+	* export a function
+	* export a higher order function
+	* export a singleton
 
-NOTE:http://bites.goodeggs.com/posts/export-this/
+NOTE:
+- exports is a reference to module.exports (var exports = module.exports = {})
+- namespace: export an object with a number of properties (mostly functions) Ex: fs
+- function: export a function as an interface to a module (factory function that returns an object when invoked) Ex: Express
+- functors: takes 1 or more functions and returns a function Ex: query middleware
+- singleton: because 'require' caches the value assigned to module.exports, all calls to ```require('elasticsearch-backend')``` will return the same instance
+- Ref: http://bites.goodeggs.com/posts/export-this/
 
 ----
 
