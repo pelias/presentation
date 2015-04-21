@@ -17,7 +17,7 @@
 
 Geocoding is the process of transforming input text, such as an address, or a name of a place—to a location on the earth's surface.
 
-![](https://raw.githubusercontent.com/pelias/presentation/master/nyc-node.js-meetup/geocoding.gif)
+![](https://raw.githubusercontent.com/pelias/presentation/master/nyc-node.js-meetup/geocoding_times_square.gif)
 
 <aside class="notes">
   Its that thing you do when you search for a place on a map
