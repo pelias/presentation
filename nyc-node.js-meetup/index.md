@@ -276,8 +276,6 @@ NOTE:
 
 ## Collaborate with us!
 
-***[pelias.mapzen.com](https://pelias.mapzen.com)***
-
 ***[github.com/pelias/pelias/issues](https://github.com/pelias/pelias/issues)***
 
 ![image](https://raw.githubusercontent.com/pelias/presentation/master/nyc-node.js-meetup/github_issues.png)
