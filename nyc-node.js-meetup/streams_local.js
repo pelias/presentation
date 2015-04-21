@@ -3,7 +3,7 @@ var geonames = require('geonames-stream'),
 	through  = require('through2');
  
 fs.createReadStream('NZ.zip')
-	   .pipe( geonames.pipeline )
+	   .pipe( geonames.pipeline ) // parse CSV, extract req fields, JSONify
 	   .pipe( through.obj( function( data, enc, next ){
 	   		var selected = {
 	   			id: data._id,

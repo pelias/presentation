@@ -3,7 +3,7 @@ var geonames = require('geonames-stream'),
 	through  = require('through2');
  
 request.get( 'http://download.geonames.org/export/dump/US.zip' )
-	   .pipe( geonames.pipeline )
+	   .pipe( geonames.pipeline ) // parse CSV, extract req fields, JSONify
 	   .pipe( through.obj( function( data, enc, next ){
 	   		var selected = {
 	   			id: data._id,
