@@ -161,6 +161,7 @@ request.get( 'http://download.geonames.org/export/dump/US.zip' )
 #_Demo_
 
 NOTE:
+```javascript
 var geonames = require('geonames-stream'),request = require('request'),through = require('through2');
  
 request.get( 'http://download.geonames.org/export/dump/US.zip' )
@@ -169,6 +170,7 @@ request.get( 'http://download.geonames.org/export/dump/US.zip' )
 	   		console.log( data._id, data.name, data.population );
 	   		next();
 	   	}));
+```
 
 ---
 
