@@ -184,7 +184,8 @@ request.get( 'http://download.geonames.org/export/dump/US.zip' )
 
 * can lead to too many packages
 * tangled dependencies
-* visualizing pelias' 29 packages
+* visualizing multiple packages
+* pelias has 29 modules
 
 ----
 
@@ -206,15 +207,86 @@ Error: write EPIPE
 
 ---
 
-## Links
+## Getting Data Out | API Features
 
-API instance: [pelias.mapzen.com](pelias.mapzen.com)
-<br/>
-Demo: [mapzen.com/pelias](mapzen.com/pelias)
-<br/>
-github: [pelias/pelias](https://github.com/pelias/pelias)
+ - autocomplete
+ - localization (dynamic weighting)
+ - coarse/reverse/street level lookup
+ - smart scoring (population, popularity etc)
+ - categories (bars, restaurants etc)
+ - detailed | simple result
+ - ***NLP***
+
+----
+
+## Simple API
+
+<b>`/search`</b>
+<small>
+
+| param | required | description |
+| - | - | - |
+| `input` | yes | full text search string |
+| `lat`, `lon` | no | geo-bias to help sort results |
+| `bbox` | no | only results contained within that region will be returned |
+| `size` | no | number of results, defaults to 10 |
+| `layers` | no | result types to return, defaults to `poi`, `admin`, `address` |
+| | | |
+
+</small>
+
+----
+
+#_Demo_
+
+[mapzen.com/pelias](mapzen.com/pelias)
 
 ---
+
+### Open Source Project | Challenges
+
+- maintaining transparency
+- attracting contributors
+- trying to support a large<br/>variety of usecases
+
+NOTE:
+- transparency when it comes to process, planning, identifying priorities
+	- hard to do everything in github
+- building a community around a project
+- building a highly customizable architecture to support everyone's needs
+
+---
+
+## Collaborate with us!
+
+***[pelias.mapzen.com](https://pelias.mapzen.com)***
+
+***[github.com/pelias/pelias/issues](https://github.com/pelias/pelias/issues)***
+
+![image](https://raw.githubusercontent.com/pelias/presentation/master/nyc-node.js-meetup/github_issues.png)
+
+<aside class="notes">
+- We would love to work with you<br/>
+- Have a unique dataset? Write a pelias importer!<br/>
+- or tell us about the dataset and we'll help you write an importer<br/>
+- Open an issue, contribute on an existing issue<br/>
+- Discuss on topics like 'street intersections, NLP etc' <br/>
+- Review our code, comment on our pull requests<br/>
+- All our main stories/issues are opened here<br/>
+- Get involved, Join the conversation at
+</aside>
+
+---
+
+# Thank you!
+
+***Harish Krishna***
+
+***harish@mapzen.com***
+
+***@harizh***
+
+<p style="margin-top:80px">Slides: <em>https://github.com/pelias/presentation</em></p>
 
 <style>
 	.reveal section img {
