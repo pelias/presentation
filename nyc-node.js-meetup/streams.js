@@ -5,6 +5,12 @@ var geonames = require('geonames-stream'),
 request.get( 'http://download.geonames.org/export/dump/US.zip' )
 	   .pipe( geonames.pipeline )
 	   .pipe( through.obj( function( data, enc, next ){
-	   		console.log( data._id, data.name, data.population );
+	   		var selected = {
+	   			id: data._id,
+	   			name: data.name,
+	   			geo: data.latitude + ',' + data.longitude,
+	   			state: data.admin1_code
+	   		}
+	   		console.log( selected );
 	   		next();
 	   	}));
