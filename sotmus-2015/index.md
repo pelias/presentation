@@ -5,6 +5,8 @@
 
 SOTMUS 2015 --- peter.johnson@mapzen.com
 
+https://github.com/pelias/presentation
+
 ---
 
 # Geocoding
@@ -179,6 +181,141 @@ fst = {
 
 ---
 
+# Linguistics
+
+- different languages (i18n)
+- tokenization
+ - stop words
+ - stemming
+ - synonyms
+ - ngram, prefix ngram
+ - shingles
+ - ascii folding
+ - fuzz and slop
+
+---
+
+# Standard tokenizer
+
+<section>
+  <pre><code>
+    1. Welcome to state of the map!
+  </code></pre>
+  <pre><code>
+[ "welcome", "to", "state", "of", "the", "map" ]
+  </code></pre>
+</section>
+
+---
+
+# Stop words
+
+<section>
+  <pre><code>
+    1. Welcome to state of the map!
+  </code></pre>
+  <pre><code>
+[ "welcome", "state", "map" ]
+  </code></pre>
+</section>
+
+---
+
+# Stemming
+
+<section>
+  <pre><code>
+    1. The mappers walked the streets
+    2. I used a map while walking the street
+  </code></pre>
+  <pre><code>
+[ "map", "walk", "street" ]
+[ "used", "map", "while", "walk", "street" ]
+  </code></pre>
+</section>
+
+---
+
+# Synonyms
+
+<section>
+  <pre><code>
+    1. The mappers walked the streets
+  </code></pre>
+  <pre><code>
+[ "map", "walk", "stroll", "street", "road", "avenue" ]
+  </code></pre>
+</section>
+
+---
+
+# NGRAM
+
+<section>
+  <pre><code>
+    1. The mappers walked the streets
+  </code></pre>
+  <pre><code>
+[ "t", "th", "he", "the", "m", "ma", "ap", "map", "app", "pp" .. ]
+  </code></pre>
+</section>
+
+---
+
+# Prefix 2-3GRAM
+
+<section>
+  <pre><code>
+    1. The mappers walked the streets
+  </code></pre>
+  <pre><code>
+[ "th", "ma", "map", "wa", "wal", "st", "str" ]
+  </code></pre>
+</section>
+
+---
+
+# Shingles
+
+<section>
+  <pre><code>
+    1. The mappers walked the streets
+  </code></pre>
+  <pre><code>
+[ "the mappers", "mappers walk", "walked the", "the streets" ]
+  </code></pre>
+</section>
+
+---
+
+# ASCII folding
+
+<section>
+  <pre><code>
+    1. Café
+  </code></pre>
+  <pre><code>
+[ "cafe" ]
+  </code></pre>
+</section>
+
+---
+
+# Fuzz & Slop
+
+<section>
+  <pre><code>
+    1. 101 Mapzen Place
+  </code></pre>
+  <pre><code>
+    101 Mapzen Place
+    10 Map Place
+    Mapzeen Place 102
+  </code></pre>
+</section>
+
+---
+
 # Programming Language
 
 - easy to accept contributions / pull requests
@@ -198,15 +335,19 @@ fst = {
 - http://openaddresses.io
 - http://quattroshapes.com
 - http://www.geonames.org
-- other / civic / proprietary
+- other / civic / federal / proprietary
 
 ---
+
+# interesting
 
 - Points ( lat/lon centroids )
  - place
  - address
 
 ---
+
+# more interesting
 
 - Polygon ( multiple points joined )
  - place
@@ -227,15 +368,6 @@ fst = {
 
 ---
 
-# polygons intersection
-
-<br />
-
-![image](https://raw.githubusercontent.com/pelias/presentation/master/state-2014/intersection.gif)
-
-
----
-
 ![image](https://raw.githubusercontent.com/pelias/presentation/master/state-2014/osm-london.png)
 
 ---
@@ -244,394 +376,123 @@ fst = {
 
 ---
 
+# Dirty Data
+
+- all data is error prone
+- duplicates need to be merged and removed
+- character encoding issues
+- more errors and inconsistencies
+ - ALL CAPS!
+ - incorrect name tags
+ - suffixes / prefixes
+ - etc.
+
 ---
+
+# Formats
+
+- OSM / PBF
+- Shapefile
+- CSV / TSV / text
+- etc.
+
+---
+
+# Import Pipelines
+
+- can run for hours / days
+- potentially use large amounts of RAM
+- code should prevent flooding / crashes
+
+---
+
+# stats
 
 ![stats](http://peter.johnson.s3.amazonaws.com/stats.png)
 
 ---
 
-![cat](http://www.themarysue.com/wp-content/uploads/2013/03/Cat-on-a-Map.jpg)
-
----
-
-# use cases
-
-<br />
-
-- full planet build
-- regional geocoder
-- mobile apps
-- attach location data to forms
-- postcode finder
-- autocomplete airports for flight search
-- correct postal addresses
-
----
-
-# where we're at
-
-- full planet build
-  - 62.3MM points-of-interest
-- no strict language requirement, currently written in node
-- no postgres
-
----
-
-![cat](http://www.townsandtrails.com/blog/wp-content/uploads/2010/05/Map-Cat.jpg)
-
----
-
-# sub projects
-
-- import pipelines
-  - polygons
-  - centroids
-  - geopipes
-
-<br />
-
-- api (search logic)
-
-- street addresses
-
-- operations
-
-- developer/public relations
-
-
-# geonames
-
-<br />
-
-- ~9M records
-- centroids
-- population counts
-- alt names
-- mostly USA ~2M vs. 50k for UK
-
----
-
-# openstreetmap
-
-<br />
-
-- centroids & polygons
-- street addresses
-- stats
- - nodes: 2,640,202,473
- - ways: 263,788,642
- - relations: 2,978,242
-- free tagging
-- alternate names/languages
-- global coverage
-
----
-
-# denormalization
-
-<br />
-
-![image](http://osm.analysesig.net/osm2pgsql_schema/diagrams/planet_osm_nodes.implied2degrees.png)
-
----
-
-# feature list
-
-```javascript
-var features = [
-  "amenity",
-  "building",
-  "shop",
-  "office",
-  "public_transport",
-  "cuisine",
-  "railway",
-  "sport",
-  "natural",
-  "tourism",
-  "leisure",
-  "historic",
-  "man_made",
-  "landuse",
-  "waterway",
-  "aerialway",
-  "aeroway",
-  "craft",
-  "military"
-];
-```
-
----
+# cats
 
 ![cat](https://c2.staticflickr.com/6/5121/5192869874_2514188528.jpg)
 
 ---
 
-# geopipes
+# geography
 
-![image](https://raw.githubusercontent.com/pelias/presentation/master/state-2014/geopipes.png)
-
----
-
-# architecture
-
-<br />
-
-- elasticsearch
-  - full text search
-  - geo capabilities
-  - sharding
-
-<br />
-
-- nodejs
-  - streams
-  - modularity
-  - easy to use
-
-<br />
-
-- golang / c++
+- point in polygon
+- polygon in polygon
+- address ranges
+- filtering / sorting by distance
+- boundaries
 
 ---
 
-![cat](http://www.lolcats.com/images/u/08/23/lolcatsdotcomlzhksdvmkt1i1t2y.jpg)
+## point intersection
+
+![image](https://raw.githubusercontent.com/pelias/presentation/master/state-2014/intersection.gif)
 
 ---
 
-![image](https://s3.amazonaws.com/kinlane-productions/api-evangelist/elasticsearch/elastic-search-logo.jpg)
-
-<br />
-
-- java
-- enterprisey
-- lucene
-- full text search
-- geo capabilities
-- sharding
+![pic](http://i44.tinypic.com/pumpw.jpg)
 
 ---
 
-![index](https://developer.apple.com/library/mac/documentation/UserExperience/Conceptual/SearchKitConcepts/art/inverted_index_textposition.jpg)
+## address interpolation
+
+![interpolation](http://www.geoinformatics.com/layouts/cmediageoinformatics/img/backup2/online%20articles%202007/geo76%20p30-32%20route/route-directions075-03.gif)
 
 ---
 
-# stemming
+## distance scoring
 
-<br />
-
-![stem](https://leanjavaengineering.files.wordpress.com/2012/02/figure3.png)
+![distance](http://blogs.microsoft.co.il/blogs/gilf/image_176A42DD.png)
 
 ---
 
-# FST
+# running a service
 
-![fst](http://www.elasticsearch.org/content/uploads/2013/08/suggest_1.png)
-
----
-
-# api
-
-- endpoints
-  - /search
-  - /suggest
-  - /reverse
-  - /hierarchy
-- modifiers
-  - ?size=
-  - ?layers=
-  - ?lat=&lon=
-- public contributions
-
----
-
-![cat](http://ecx.images-amazon.com/images/I/31iaim9GeOL.jpg)
-
----
-
-# search logic
-
-- just nearby
-  - geodistance from lat/lon
-- results from neighboring cities/states/countries
-  - uses different precision levels (5+3+1)
-- include admin values
-  - based on the zoom level
-  - Ex: show countries at zoom<8 & neighborhoods zoom 12+
-- taking weights into account
-  - admin1 > neighborhood > osmnode > geoname
-- fuzzy matching
-  - generates an edit distance based on the search term length
-  - 'layd moody' -> 'lady moody', 'maysbille' -> 'maysville'
-
----
-
-# search logic (experimental)
-
-- search term analysis on the fly
-- if search term starts with a number, prioritize street addresses
-- if search term is less than x characters without a space, show higher admins
-- tokenize on comma and ignore the tokens that follow
-- improve general search quality based on relevance & feedback (future)
-
----
-
-# search quality
-
-- what does good search quality mean?
-  - personalization?
-  - being smart (creepy?)
-  - doing the right thing (what?)
+- server operations
+- deployment automation
 - testing
-  - unit tests
-  - regression testing
+- apis
+- feedback
+- rate limiting
 
 ---
 
-![cat](https://c1.staticflickr.com/1/8/6734519_569a7e0947.jpg)
+# releasing a product
 
----
-
-# addresses pipeline
-
-- import pipeline for all (most) address data
-- bundles together:
-  - normalized address schema
-  - address deduplication
-  - suggester payload addition
-- imports:
-  - *OpenAddresses*
-  - *OSM*
-  - *TIGER*
-  - etc.
-
----
-
-# custom address imports
-
-- abstracts away boilerplate, manual configuration
-- simplify custom address imports for users
-- cut redundancy in our import codebase
-
----
-
-# addresses: future
-
-- currently running test imports
-- next step might be a geocoder for the US
-- iterate, integrate into production
-
----
-
-![cat](http://assets.diylol.com/hfs/2c9/925/2b4/resized/street-cat-meme-generator-the-streets-need-me-550389.jpg)
-
----
-
-# operations
-
-### overview
-
-- config management with Chef/Opsworks
-- monitoring via Sensu/Cloudwatch/Pingdom
- - standard host metrics alerting
- - cluster state
- - ELB unhealthy hosts
-- multiple independent systems
- - switchover via DNS (Route53)
-
----
-
-# operations
-
-### index metrics
-
-- 62.3 million documents
-- 371GB on disk (with 1 replica)
-- 64GB FST size (down from ~190GB)
-
----
-
-![stats](http://www.quickmeme.com/img/33/33fadfa1e97738f6bd7692f6e4b3fe7e329b989d257566fe0a1a2482999ddc29.jpg)
-
----
-
-# operations
-
-### architecture
-
-- Internet >> (ELB) Repose >> (ELB) API >> (ELB) Elasticsearch
- - Repose: rate limiting proxy, java, on the fly config changes
- - Elasticsearch: 1.3.4
-  - sharding determined largely by memory requirements which currently dictate node count
-  - replicas for redundancy
-   - more replicas influence FST requirements
-
----
-
-# operations
-
-### concerns
-
-- load testing
-- data ingestion time
-- rollback
- - grace period on old cluster before new load?
- - index snapshots?
-
----
-
-![cat](http://cache.desktopnexus.com/thumbnails/513548-bigthumbnail.jpg)
-
----
-
-# retrospective
-
-- geonames, what is the quality
-- quattro, excellent but needs quality review
-- osm import speed issues
+- testing
+- extensibility
 - versioning
+- issue tracking
+- feedback
 
 ---
 
-# roadmap
+# create a user interface
 
-- search quality
- - classification capital/city/transport/cafe etc.
- - population weights
-
-- data visualization tools
-- ease of imports
-
-- split polygons & intersections to new repo?
-  - import osm boundaries?
-  - quattroshapes fixes work
-
----
-
-# roadmap continued
-
-<br />
-
-- integrating addresses pipeline with osm/pelias (@severyn)
-
-- open issues:
-  - guesswho
-    - global suggest
-  - node-osmium
-
-- ngram?
-
-- aliases?
+- UI / UX
+- plugins
+- versioning
+- animations / interactions
 
 ---
 
 # community
 
-- triage + assignment
-- booking some speaking events (@alyssa)
-- waffle.io?
-- gitter?
+- open source
+- open data
+- open ticket tracking
+- open roadmap
+- open chat rooms
+- support
+- education / training / workshops
+- collaborate!
 
 ---
 
-![tourist](http://hellogiggles.com/wp-content/uploads/2014/09/20/lost-tourist.jpg)
+# questions / open discussion
+
+# :)
