@@ -98,7 +98,7 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 - **read** optimized *not* **write** optimized
 - **eventually consistent** *not* **transactionally secure**
 - has both **sharding** and **replication** so we can scale
-- supports large indeces totalling 50GB-100GB of RAM
+- supports large indices totalling 50GB-100GB of RAM
 - has a feature rich **geographic API** built in
 - supports **multilingual language analysis**
 - capable of **peformant full text search**
@@ -322,8 +322,8 @@ fst = {
 - strong **geo** libraries
 - **linguistic** algorithms + **multibyte** support
 - **I/O** performance
-- multi-core artichecture / parallel processing
-- unit / functional **testing** librarires
+- multi-core architecture / parallel processing
+- unit / functional **testing** libraries
 - good support for data **streams**
 
 ---
