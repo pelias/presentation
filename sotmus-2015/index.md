@@ -116,7 +116,7 @@ Reverse geocoding is the opposite, it transforms your current geographic locatio
 
 ---
 
-![relational](https://cdn.tutsplus.com/net/authors/lalith-polepeddi/relational-databases-for-dummies-fig4.png)
+![relational](https://web.archive.org/web/20141023055650/https://cdn.tutsplus.com/net/authors/lalith-polepeddi/relational-databases-for-dummies-fig4.png)
 
 ---
 
