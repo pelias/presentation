@@ -1,0 +1,716 @@
+>> Okay, folks. So... come to talk about how to build a geocoder, which is argua
+bly pretty tough. 
+
+>> Basically I can explain why I'm with you today. So first of all, all these sl
+ides are here. Hosted here on the web. So if I go too fast and you miss a link, 
+you can just go and grab them from there. And then also the... What was written 
+about this talk was actually about helping everybody to install a geocoder on th
+eir computer. And I just think that due to the internet and all of the complexit
+y of different people's computers, we probably won't get to that. But if somebod
+y wants to do that afterwards, please come and see me, and we'll get it installe
+d on your laptop. I also had it installed on the RaspberryPis. We had a geocoder
+ on a RaspberryPi, which is cool. A $25 computer, and it's powerful enough to do
+ all of this stuff. So instead, what we're gonna talk about is just a high level
+ overview of geocoding. And then at the end we'll have a chance to just talk abo
+ut any individual parts that anybody wants to talk about in more detail, or if y
+ou want to talk about something, you can stop me and we can talk about it for a 
+little bit, and that's fine as well. So what is geocoding? The basics of it is..
+. We've all seen it in Google Maps and stuff like that. So as you type a place i
+n the world, it figures out what you meant, hopefully. And it presents it here, 
+and you can make a selection. There's sorting and there's filtering, and potenti
+ally there's hundreds of millions of places in the world that it's searching, an
+d it does it as quickly as possible. So here you can see the autocomplete is hap
+pening in sort of subhundred milliseconds. So even if you're a super fast typer,
+ you should be able to get ten of them in a second. And then the opposite of tha
+t is reverse geocoding, which is just -- you give a lat/long, and it tells you t
+he nearest place, the nearest ten places. What we're doing now is the nearest te
+n Chinese restaurants and stuff like that. And that's all based on OpenStreetMap
+ data, which is really cool. So the project I'm working on is called PELIAS, a M
+IT-licensed Open Source, open data geocoder. A geocoder for everybody. We're try
+ing to provide the tools that are required to build your own kind of geocoder. A
+nd we also provide more opinionated distribution. Like Ubuntu provides a distrib
+ution of Linux, we provide a distribution you can install on your server. But it
+'s fully customizable. And we have an API you repositories there. And this is th
+e quick start. It's a vagrant instance, and if you want to get up and running re
+ally quickly without having to worry about configuring everything individually, 
+you can follow the guide here on the vagrant install and that will get it set up
+ on your laptop and you can start playing with it and hacking on it. But a more 
+general -- build your own geocoder. I can talk about what we did and the steps y
+ou need if you want to build one yourself. If you want to build your own geocode
+r, what sort of features would you be looking for? You want it to be Open Source
+, because it's so complex. There's so many different edge cases and different co
+untries in the world, different address schemas, all that sort of stuff, that yo
+u can't be there on the ground to observe the truth and to ensure the accuracy o
+f your product. So it has to be Open Source, unless you have a hundred million..
+. Billions of dollars that you can go and spend and put people on the ground to 
+ensure its quality. Nowadays, people expect the fast autocomplete, especially in
+ the mobile experience. And that's something that Nominatim doesn't offer us at 
+the moment and probably never will, due to the fact that it's based off postgres
+, and just -- the technology will probably never get us there. We expect locatio
+n bias. So if you type pizza here -- I live in Berlin, so pizza in Berlin, you s
+hould get different pizza restaurants. Filtering and sorting. If you type New Yo
+rk, you probably only want to get New York results, and sorting would depend on 
+your geographic bias and the words that you type. So this stuff is really subjec
+tive and really difficult to test, but we can talk about it a little bit as well
+. This thing is kind of complicated. It's called terms frequency/inverse documen
+ts frequency -- and it's like -- the word "the" or "street" and , "road" appear 
+a lot in our dataset, so it's less important. So we can figure out how important
+ that word is or how unique that word is in the corpus of our data. Fuzziness is
+ spelling mistakes. Getting the order wrong. Missing chunks of text. That sort o
+f stuff. We want to be able to run it for the whole planet and also want to be a
+ble to run it just for our city. So we want to scale the architecture out to 20 
+servers, but also run it on a RaspberryPi. Batch geocoding is common for busines
+ses. That's just taking a spreadsheet and geocoding the addresses. Address inter
+polation is difficult. That's the idea that we have some addresses in the system
+ but not all of them. And we can try to infer the ones that we don't have from t
+he ones that we do have. Cross streets, very common in New York. It's like inter
+section. And we want to support that and we want it to be easy to set up and to 
+test. Any questions about that? 
+
+>> Isn't cross street common outside of New York? 
+
+>> No, it's common in, for instance, Melbourne -- is a city which is also built 
+on a grid. But most other places in the world, they don't say -- when I come her
+e and the taxi driver is like -- what's the cross street? They don't do that els
+ewhere. 
+
+>> Do you have the equivalent thing in Berlin? Do you say between this and this?
+ 
+
+>> The other thing they do is they talk about nearby landmarks or they just give
+ a house number. You'll find it's not as common as it is in Melbourne and New Yo
+rk. So there's a few different types of geocoding. And this is called coarse geo
+coding. And it only returns administrative areas. So countries, cities, states, 
+villages, towns, municipalities, whatever you want to call them. It's really int
+eresting. It's really nice for something like weather.com or Tinder. If you want
+ to find somebody new -- air BNB. Heaps of apps are using this basic thing. It's
+ like a way of localizing your audience very, very quickly. You can say -- do yo
+u want something in Berlin? Yeah, I do. And you only get events in Berlin. It's 
+very common. And we have place geocoding. Which is like -- you see on Facebook. 
+You see it on FourSquare. FourSquare also has the reverse of this. Like which pl
+aces are near me now. All the services, all the main social networks are using s
+ome form of place geocoding. And then the last one is address geocoding, which i
+s... Like, it may autocomplete the form for you, when you're posting something. 
+It's really helpful to avoid errors in the postal system. And the inverse of thi
+s is -- like, Uber, actually, you can drag the pin. And it says -- are you at 35
+0 fifth Avenue? Yeah, I am. And that's very difficult with the OpenStreetMap dat
+a we have at the moment. So to build a geocoder, you kind of have to wear many h
+ats. A lot of them are technical. Computer sciency. Information retrieval, progr
+amming and testing, all the data you have to consume, hundreds of millions of th
+ings. Linguistics is the other major part of it. Like looking at languages, fore
+ign languages, looking at analysis of text. And I'll get into that in more detai
+l. And obviously geography. Though geography doesn't play as big a part in it as
+ you might think, it is really important for filtering and sorting. Community ma
+nagement is something to think about if you want to actually have a geocoder tha
+t's going to get to a certain scale, like where people can contribute to it, and
+ it's not going to be a short-term project. It's going to be a long-term project
+ that sticks around for a few years, maybe 10 years, 15 years. And the last -- U
+ser Experience, UI, UX. And if you can control the front-end, as well as control
+ling the API layer, it gives you much more flexibility in a feedback loop for yo
+ur product, where potentially you can log user activity and use that to improve 
+the product, which we don't do at the moment. So as far as, like, where to start
+ -- you have to kind of choose a database to get started with. And there's lots 
+of options out there. You have stores -- I've got the slide here. So you have re
+lational databases, document stores, key-value stores. Actually, I'll get into t
+his in a little bit more detail in the next slide. But there's certain character
+istics of your database that you need to also look out for. You're going to be i
+n a heavy read environment. Especially with the autocomplete. You're going to ge
+t a lot of demand for reads from the database. Whereas the writes to your databa
+se will only happen probably during index time, which may only happen weekly or 
+monthly, or it might happen daily. You need eventual consistency in your system,
+ not transactional security. What I mean by that is -- you don't need to ensure 
+that when two people insert a record at the same time that one wins. An example 
+of that is -- two people buy the last product in a store. You need to make sure 
+that only one person buys it. Otherwise, a lot of confusion. We don't really car
+e with this database. We're more concerned with having the ability to shard and 
+replicate. To be able to scale it across lots of servers, than to ensure we have
+ transaction security. We need to be able to support large indices. So our plane
+t-wide geocoder at the moment is ruffle 60 gigabytes of RAM, obviously not somet
+hing you can run on your laptop and that all software can deal with. It should h
+ave a feature rich geographic API built in. Which is something that PostGIS has.
+ But also, elastic search, and MongoDB and CouchDB does, and more and more datab
+ases are adding functionality into their databases. It should support multi-ling
+ual language analysis. I'll get onto that a little bit later. How -- instead of 
+using regular expressions or really basic search queries, you can dive deeper in
+to looking at the language structure. And the last one is capable of performing 
+a full text search. Give it really complicated input and it will figure it out f
+rom a huge amount of information. So I'll get into these very quickly. So it's a
+ bit techie. So if you want to stop and talk about it more, just let me know. Th
+is is a classic relational database everybody is familiar with. Like an SQL data
+base or spreadsheets. This structure is a document store that people are becomin
+g a lot more familiar with these days. Where you store a structured document int
+o document store, and when you retrieve it, it doesn't have to do any CPU work t
+o get that document out. And nowadays, it's even... They're combining that with 
+the relational databases, so you can have two documents, and you can actually jo
+in those documents at retrieval time. That's quite interesting. There's one call
+ed... Rethink DB that does that. This is a key-value store. It's pretty basic. B
+ut you can build pretty interesting things ton -- the blue ones could be like mo
+vies, and the red ones could be like actors and directors, and you may act and d
+irect in a movie, and so through that, you can infer relationships between objec
+ts, and this is the sort of structure you would use to do sky scanner, any fligh
+t software, where you need to know that you're going to hop from New York to Lon
+don to Berlin or whatever like that. Because you can walk the graph. But the two
+ that are really important for search are -- this thing is called the inverted i
+ndex. And so the idea is that like -- here is a bit of your text. You can just -
+- you tokenize it, which means basically in this space -- into the white space, 
+you create one token, and then you keep it here as the keys, and in the values, 
+you have a list of the document numbers. One, two, or three, where those tokens 
+appear. And I'll get into that a little bit more. And the other option you have 
+-- so this is an example here. Welcome to State of the Map. Mappers meet up in t
+he United States. So you have here the token -- welcome appears only in the firs
+t document. State, however, appears in the first and the second. And you'll see 
+here it says states, not state, but I'll get onto that in a second. And map as w
+ell. Like, it says map here. With an exclamation mark, and this says mappers, bu
+t we want to try and reduce down the inverted index, so we can do a bit of fuzzi
+ness, like we were talking about before. Any questions on this? No? So the other
+ option you have -- autocomplete is this thing called an FST, a finite state tra
+nsducer. It sounds really complex, but the way that I think about this is like w
+ith traffic lights. So if a traffic light goes from green to orange, green to ye
+llow, sorry, and then yellow to red, and then red to green, it kind of has four 
+different states that it can move through. And in the same way, this is a good w
+ay. So you can imagine as you type the first letter of your autocomplete, and th
+en as you're typing here, it's giving you a list of the possible places that you
+ can get for your result. The problem with this structure is obviously that it's
+ anchored on the left. So if you don't start with the correct letters, like if y
+ou start with a P instead of a J, you will never get what you're looking for. An
+d here is an example of this. So the states here would be like... It goes from P
+ to I. On the first one and the second one. And it goes from I to Z only on the 
+first document and I to S on... And this a good structure because it's really ch
+eap to walk the graph and get the results that you want, but it uses a lot of me
+mory. This is also really interesting. I think probably a lot of you know what t
+his is, and if you don't, you should check this out. I've got a nice demo here. 
+It's a way of creating spatial keys in your database to do really quick spatial 
+lookups. And if you use this key algorithm, it means that when you sort the docu
+ments in your index, all the ones that are geographically close will actually be
+ next to each other in your index, which makes them heaps easier to sort on. I w
+on't go into that in detail. We can talk about it later. So I'll go quickly into
+ linguistics. Time? Okay. So you have to consider -- like, you've got different 
+languages to deal with. And then you have a lot of different ways of dealing wit
+h those languages, to try and get a structure that, like, lets you query it effi
+ciently. And fast. Right? So here's a good example of the standard tokenizer I w
+as talking about before. What we've done here is we've just split the sentence b
+y punctuation and whitespace, and we've lowercased the w. That's all we've done.
+ And this is the resulting token that we'd enter into our inverted index. You ha
+ve something called stop words. So stop words are really common, where it's like
+ -- the, of, to. In our case, we use street and road in some cases. But they're 
+a little bit problematic, because for instance the word die in English is not th
+at common, and it means to kill somebody, but in German, it means the. It's a ve
+ry common stop word. So you need to be careful about which indexes you're using 
+which stop words on. And that can help to reduce the index size, which can get t
+o 60 gigs in memory. Something called stemming. So this is the idea that you can
+ stem a word to its shortest part. Like a parent form. Like mappers will turn in
+to map. Walked will turn into walk. And walking will turn into walk as well. So 
+if you search on a search engine and miss the suffix, get the suffix wrong, it s
+till figures out what you're talking about, because it's been stemmed. In in Eng
+lish, you can figure out how to do it, but there are stemming algorithms for oth
+er languages. Including Russian. You don't want to get into writing that yoursel
+f. It's very academic. Synonyms are pretty obvious. With walk we say we want wal
+k, stroll, with streets, we want street, road, and avenue. Adding new tokens in,
+ where they weren't there before. Or maybe expand a number from 1 to one. Number
+ 1 to the word one. This is a structure used for autocomplete. It's called engra
+ms, and it's the idea that each word can be split up into these little grams, an
+d you can define the size that they are, and you can imagine that we can use the
+se very efficiently to do the autocomplete as well, because we look at how many 
+of those grams you've typed and how many we have in index, and we can reduce dow
+n that big index very quickly to find only the documents in which these appear. 
+This is one we're looking at, at the moment. It's called a prefix gram. And it's
+ just... It only takes the ones at the front. So it's like th, ma, map, like tha
+t. And it's really nice, because generally you get the start of a word right, bu
+t you don't really get the end of the word right, is what we find. And so it giv
+es you some of the benefits of the FST structure that I was talking about before
+. It's anchored on the left, but only anchored on the left for each individual t
+oken, each individual word, rather than for the whole phrase. That one is quite 
+nice. 
+
+>> So why the variance in two to three? 
+
+>> You can choose how many you want. The problem with a one gram is... 
+
+>> Why is it fixed? 
+
+>> One isn't useful, and larger than three, you almost never have enough data. 
+
+>> It's common to have a range from two to four. To use... 
+
+>> You can choose whatever you want. That's why they're called engrams. Because 
+it's like... Any number. But if you do one, something to consider is if you had 
+the letter S -- there's lots of streets in there. So in your inverted index, the
+ key is S and the value is this massive array with every single ID in your whole
+ index. And when you try to reduce that down quickly, it takes a lot of CPU time
+. So I wouldn't advise using 1 grams. We use them for countries. So if you type 
+United States but you want a street address, for instance. This is something cal
+led shingles. I didn't make up the name. It's the idea of combining two adjacent
+ words together. And that's really nice for disambiguating street addresses. Oth
+erwise 101 and 110 of the streets would match the same tokens and wouldn't score
+ correctly. Something called ASCII folding. It's really nice for European langua
+ges. These, again -- I didn't pick the names. Fuzz and slop. Fuzz is like this. 
+Like... Mapzen. Mapzeen. And using what we looked at before, the FST, and analyz
+ing a graph, or using the engrams as well. You can provide some level of fuzz. A
+nd slop is about putting them the wrong way around. I don't really have a good e
+xample here. But if it was place Mapzen, for instance, that's an example of -- t
+hey're sloppy. They're put in the wrong way round. In Germany, in street address
+es, the number comes at the end. Whereas here it comes at the start. You have to
+ deal with that case as well. As far as, like, choosing a programming language, 
+we use NodeJS, and there is really no... I hate to be like... Saying one languag
+e is the best. I think that's a really bad attitude. But there are some attribut
+es of a language that you should look for. First, we want it to be easy to accep
+t contribution and pull requests from other people. JavaScript is like lingua fr
+anca and easy to contribute. Should have strong geolibraries so we can do poly i
+ntersections and stuff like that. Have linguistic algorithms and multi-byte supp
+ort that we talked about before, have IO performance so when we're doing fast co
+mplete we're not held back by its ability to talk to the network. Preferably mul
+ti-core architecture and parallel processing for the data imports. They can take
+ a long time. At the moment it's two days for us, to import the planet. We're ho
+ping to improve that some more with parallel processing. Has to have good unit a
+nd functional testing libraries, for obvious reasons. We need to make sure we're
+ not regressing and that quality is being improved rather than worsened. And the
+ last one is one of the reasons that we picked Node -- is it has good support fo
+r data streams. And the reason for that is -- when you're dealing with huge amou
+nts of data, the planet file is 25 gigs, compressed. So uncompressed, it's large
+. If you try to use, for instance, a job queue, you'll take it in, put it into a
+ job queue, and another process will come along and take things out of the job q
+ueue, you have the ability to flood your queue. It'll just fill up. You'll fill 
+up the memory or crash the server. So using data streams, the opposite of video 
+streaming, it's putting stuff into the database using streams -- it's a really n
+ice way of keeping all your machines from crashing, essentially. 
+
+>> Geolibraries are really not all that important, are they? I mean... Like, the
+ operations that you're doing... Geospatial operations are not that complex. Lik
+e distance... 
+
+>> You're right. I have some slides on that. 
+
+>> But you could get into some issues where you're doing address interpolation. 
+If you want to get more complex. So you want to have support for it. 
+
+>> But realistically, you want to be using geohashes the whole time. Doing strin
+g prefix matching, because it's just much more efficient. Anyway, let's not geek
+ out too bad. These are our data sources. It's all open data. So it's all availa
+ble for free and you can download it and import it straight away. The planet fil
+e, released from OpenStreetMap, I've got some stats later. Roughly 50 million, s
+omething like that. And we provide metro extracts of your city, if you just want
+ to do New York, for instance. Open addresses is a really important project for 
+us, that fills in the gaps and the holes in the addresses that we don't get from
+ OpenStreetMap. Quattroshapes is a really cool polygon project that came out of 
+FourSquare and provides us with a lot of the neighborhood polygons that we need.
+ Geonames is a great project as well, and there's no reason you couldn't put any
+thing else in there if you wanted. Proprietary data, if you wish. I'm not going 
+to write the code for that, but you could, if you wanted to. So in the data, you
+'ve got points. Lat/longs. They're like places or addresses, and they're kind of
+ interesting. But what's really interesting is polygons. And you see only one mo
+re thing -- a boundary. Administrative boundaries are really, really interesting
+. That is a screenshot of the Quattroshapes project, at admin 1. The second leve
+l division. Admin 0 would be the countries, and you can see here the next child 
+relationship to a country in the United States is a state, and in other places, 
+it might be -- for instance, in the UK, it's Scotland, England, Wales, and Irela
+nd. In Australia, it's states, and in New Zealand, I think it's the islands. I d
+on't know. So here's like... This is the Quattro shapes again. This is a localit
+y? We have several layers of these. And then we can see here like... This one is
+ neighborhoods. Which is really nice. We've simplified them a little bit. But yo
+u can see it's like -- it's pretty good. So what that means is that with OpenStr
+eetMap data, which doesn't have a hierarchy, a place hierarchy, we can drill dow
+n -- say this is the point here, drill down through here, through all those othe
+r layers as well, and you'll be able to establish which country, state, neighbor
+hood you're in, everything like that, and we can add that to the end of the stri
+ng, when you get it back, so you can figure out if that's the point you were tal
+king about. This is from OpenStreetMap. This is a London boundary it you can see
+ in the middle there. For political reasons, this is the City of London, which i
+s a different thing. For a lot of reasons which other people can talk about. So 
+what we're looking at doing is extracting that border information from... We've 
+got it here live, actually, if anybody wants it. You can extract the borders fro
+m OpenStreetMap in the same way we saw with the Quattroshapes project, so when m
+appers are out there, mapping these areas, we can pull those borders out and use
+ those borders to mark up the places of interest. And it's really important here
+, because like the Quattroshapes project, there are social boundaries, where peo
+ple think that they are. Because there's kind of no such thing as neighborhoods.
+ Like, neighborhoods don't really have fixed borders. They kind of... They can m
+ove, actually. And in some cases, the government decides, or the civic planners 
+decide where those borders are. In other cases, it's a little bit more blurred. 
+So just check that out. They're GeoJSON extracts of those borders. 
+
+Yeah. I mean, all the data is dirty. Especially... Well, it's all dirty. So it's
+ all got errors, and there are a lot of duplicates in the datasets. Between data
+sets and in the same dataset that need to be accounted for. There are weird char
+acter encoding issues. Not in OpenStreetMap, but in the other dataset. And there
+'s just, like, heaps of errors. Like people writing all in caps lock. It bugs th
+e hell out of me. Incorrect name tags. Like... Name... Lamp post. Do I need to k
+now it's a lamp post? It's marked as a lamp post and named as a lamp post as wel
+l. Suffixes and prefixes. You know what I'm talking about. Not very fun. Just so
+me formats that you want to import. OpenStreetMap, obviously. Shape files. Just 
+random TSV files that you get, et cetera. So we're providing adapters for all th
+ose formats. Just briefly on import pipelines, they can run for hours or days, s
+o you need to kind of test your code pretty well for those things. Potentially g
+oing to use a large amount of RAM to do them. Polygon intersections -- you might
+ not want to load 8 gigs of polygons into RAM, and you need to prevent flooding 
+and crashing, like I said before, for obvious reasons. So these are our stats at
+ the moment. 166.4 million places in the database. And you can see kind of where
+ they come from. These are nodes, like places. And these are ways that are place
+s as well. And then some OpenStreetMap entities have, like, address, house numbe
+r, and address street on the tags as well. So we pull those out and make them a 
+separate entity as well, so you can search by address. And there's 44.9 million 
+of them in there. Compared to the open addresses that we're doing, which gives u
+s 96.9. So you can see already with open addresses, though it's a young project,
+ it has twice as many addresses than OSM. Although I think we could probably get
+ a little bit more, because we're not really passing the ranges of those complet
+ely. If it's 3-5, we're not parsing that at the moment. Any questions? 
+
+>> How many of those addresses from open address are unique, or do you have to c
+onflate and dedupe between it and OSM? 
+
+>> We have a deduplicator for that one data pipeline but we're not using dedupe 
+across data imports at the moment, so we're not actually sure of the amount whic
+h are duplicated there. That's the honest truth. It depends. Open addresses is r
+eally interesting, because in some countries you have great coverage. New Zealan
+d is totally covered. But then in the UK, there's no coverage. And there's actua
+lly an open addresses UK project ongoing. There's a lot of politics and stuff ar
+ound that, and so for that reason, all the OSM addresses in the UK are unique, b
+ut in the States, you might find there's more of an overlap. Especially in New Y
+ork. And New Zealand, you would find there would probably be overlap as well. So
+ we really... That's one of the areas we need to work on. It's actually a more d
+ifficult problem than it sounds like. 
+
+>> How comprehensive? What percent of the planet is that? What needs to be done,
+ do you think? 
+
+>> How many addresses are there in the world? 
+
+>> What do you think the coverage is? 
+
+>> Guessing? If you ever look at open addresses.io, they have a map. 
+
+>> You have six billion people, and assume three billion people per address... 
+
+>> Honestly, less than 10%. And OpenStreetMap is less than 5%. 
+
+>> In many cities, most houses do not have addresses. There are no street names,
+ no house numbers. Just coordinates. 
+
+>> It's a big problem. That's one thing for open addresses. 
+
+>> And one other thing, Peter, about that import pipeline, do you use any delta 
+or incremental system for that, or is it just --  
+
+>> At the moment, we don't do partial updates, we don't do minutely, hourly upda
+tes. We could do that with OpenStreetMap fairly easily, because the tooling is t
+here. With the other datasets, it's not that easy. Until the deduplicator has ma
+tured a little more, we're probably going to continue to do full reindexes. Whic
+h we can do every couple of days. 
+
+>> Have you considered providing elastic search index as a download? 
+
+>> Sure. To prevent people from having to wait the two days? 
+
+>> Do it once, provide many, kind of scenario... 
+
+>> We've talked about different scenarios. We've talked about doing a pre-proces
+sing step and providing a dump that can be done very quickly. I kind of like tha
+t, but I also like the idea that you just import whatever data you want. I'm not
+ going to tell you what data to import. 
+
+>> I'm seeing it as a parallel to your project of your extracts. There's what yo
+u draw, there's your data, but here's your search. 
+
+>> If you're doing a smaller subset, you could easily do that with vagrant, and 
+we're going to continue to keep the vagrant install, so you can specify the regi
+ons you want to download. You can do that now. It's not as obvious. So you can s
+ay -- spin me up a vagrant with just London or New York or US. And that shouldn'
+t take long. So the indexing isn't really an issue for something like that. If y
+ou want the planet, realistically, very few people can actually accommodate that
+ sort of... So if you can... Then you might not have an issue with running it on
+ your own. So we just haven't really found a good place to store something like 
+that, to make it publicly available, because it's also just a large --  
+
+>> Nobody else is running the planet, except for us. It's quite costly. It's 10 
+large servers on Amazon. Probably thousands a month to run this thing. And the c
+ost is coming down all the time, as we develop new stuff and we change the index
+es. But then actually the cost will go up again, as we get all these addresses t
+hat we're looking for. The other 90%. The cost is going to go up. 
+
+>> And then we do have the instance that runs, so you can always hit our API for
+ now. 
+
+>> Yeah, just use us. This is what I was talking about, for the geography. What 
+you actually need from your libraries. Point in polygon, polygon in polygon, add
+ress ranges, filtering, sorting distances by boundaries. This is not that much. 
+The point intersection I talked about before -- you have these layer of polygons
+, you drill down through them with your centroid, you have to figure out quickly
+ which polygons they intersect. It's a quite complicated problem, using a tree a
+nd then some point in polygon to finish it. These are some examples of the polyg
+on in polygon. It's not just simply is it inside. It's like -- does it overlap? 
+Is it completely inside it? Is it like near it? Is it like... You know? So there
+'s actually different algorithms that exist for talking about whether things ove
+rlap or intersect each other. And these are squaring. And squares are easy. Thes
+e are address interpolation. And whenever we talk to people about address interp
+olation, I was like -- oh, it's so easy. But there's a line like... 1, 100, 50..
+. You want 50? 50 is there. And then you look at that. And there's a tree there 
+and there's a stadium there. And you're like... Oh, okay. So you can provide int
+erpolations, but it's never going to be perfect. And you just have to accept tha
+t. And I would like the user interface, the UI for the user, shows that... Like,
+ hey, this is a less accurate result. This is not a definitive result. This is a
+ computed result. So we talked about doing that at indexing time, doing that at 
+query time, and I think you probably have to do it at query time. But until we h
+ave a certain -- like, 10% of the world's addresses... How well are we going to 
+do interpolation? Probably not very well. 
+
+>> Do you do reverse interpolation? 
+
+>> How does that work? 
+
+>> When you do a reverse geocoding, you want to get the exact street number wher
+e that point is, but you don't have the street. You just have a range. So you ki
+nd of guess... You see if your point is between two points, you guess what numbe
+r that point would be. 
+
+>> We don't do that. It's such a hard problem. Yeah. I mean... We could probably
+ work on that for months. But we'll tackle that at some point. And if anybody ha
+s any ideas, please... It's kind of been installed before by other people. Nomin
+atim does that. So we can look at what they've done there. And the other is dist
+ance sorting. If I want pizza places near me, and maybe I want the nearest pizza
+ place, so that should affect the sorting of the results. That's geographic as w
+ell, and it can be more difficult around the world, with the arc of the world. S
+o just kind of finishing up, there's a few other things as well, if you want to 
+build your own geocoders, running it as a service. We have a lot of servers. We 
+have an operations team, deployment automation, testing testing testing testing 
+testing testing testing testing. Writing the APIs. Getting the feedback. And act
+ioning the feedback -- it's like a lot of the feedback is -- hey, I searched it 
+thing that didn't work. Thank you, but where are you in the world? What were you
+ searching, what were you expecting? I don't live there. And rate limiting. We r
+un generous limits because we're paying for everybody to use, but at some point,
+ if somebody wants to make this... Hook up their app to this, there's a potentia
+l that they'll do a denial of service for other users on your system. That's som
+ething you have to think about if you want to get to a service scale. And then a
+lso releasing as a product, which is something we're looking at as well. So you 
+can install your own servers, have a lot more testing testing testing, extensibi
+lity, where does core end and plugins begin, versioning it, so we can change stu
+ff, and we can accept that things are wrong and fix them. Issue tracking. You kn
+ow, how people report a problem. Especially if they have different datasets. I d
+on't want to share my dataset with you, but it's not working. It's kind of hard 
+to debug. And feedback, again, like feedback, feedback. You have to create user 
+interface. I won't go into that very much, but it's really nice if you can contr
+ol the front end, for a lot of reasons. And this is a big one, I guess, as well.
+ Is to build a community around your product. So you want to be Open Source. Eve
+rything is open. Open data, open ticket tracking. We're looking at open road map
+, open chat rooms. Everything is completely open. You can see on my Github when 
+I went on holiday, because there's no green for three weeks. Everything is open.
+ Support. We need to provide support for people. We need to be nice and friendly
+ to people. When they have a problem, we need to say thank you for reporting the
+ problem. Education, training, workshops. And then collaborate. If anybody is bu
+ilding an Open Source geocoder, I would be more than happy to talk with them abo
+ut it. If they're building a proprietary one, probably not so much. Still nice t
+o chat. There are people I know who are building smaller regional geocoders, and
+ I'll happily chat with them on IRC or whatever about the stuff that I covered e
+arlier in the slides. And that's it. Any questions? 
+
+(applause) 
+
+>> Okay. I'm working for the City park. But I'm a big fan of the (inaudible). If
+ I'm working on MS active spreadsheet, latitude, longitude, there will be export
+ into (inaudible) changing in the (inaudible). Will be plugged into OpenStreetMa
+p. Is that possible? 
+
+>> You could import it into PELIAS. If you have a traditional SQL or auricle dat
+abase, some of the coordinates are latitude, longitude, and name, for instance -
+- can you import that into OpenStreetMap, I believe not, depending on licensing.
+ Into PELIAS, you can. It takes care of the tokenization, the analysis, and all 
+the stuff I covered for you. You can import into a CSV file and stream it into t
+he database. 
+
+>> Okay. 
+
+>> Can you go to the second slide so I can take a picture? 
+
+>> The second one? 
+
+>> I wrote this today. There's like 52 of them. Sorry. 
+
+>> There's a link to the slides. 
+
+>> That one? 
+
+>> Yeah, that one. That's the presentation? 
+
+>> That's the presentation, yeah. 
+
+>> All but one slide. 
+
+>> Which one is missing? 
+
+>> I'll tell you later. 
+
+>> Should have been the last slide. 
+
+>> What did you add? 
+
+>> You're working mostly databases? You're working mostly databases, geocoding -
+- in the join and out of join? 
+
+>> Yeah, we don't use a relational database. This is all... The indices are all 
+-- so I didn't actually cover that, sorry. We use Lucene, which is a linguistics
+ library, and a library for building the inverted indices and the finite state t
+ransducers, and there was a product built on top of that called Solar, which has
+ been around for a long time, and Solar provided a service on top of the library
+, and more recently something called elastic search, which is what we use, and e
+lastic search gives you all this stuff, plus a RESTful API, plus sharding, and g
+ives you the ability to elastically horizontally scale your stack. But you lose 
+a lot of the benefits of a relational database. A relational database, you can q
+uery arbitrary things from the database, do statistical analysis, ask for interp
+olations with groups and joins and stuff like that. You can't do that with this 
+structure. So... But also we didn't want to -- with the photon project, which is
+ a similar sort of project, they installed Nominatim, PostGIS, and Postgres, and
+ then into elastic search. We wanted to remove that so it was easier to install.
+ Imagine installing on a RaspberryPi. How many of them? So it's not a relational
+ database, but you can import relational data in there if you like. OpenStreetMa
+p is relational data as well. 
+
+>> You said speaking of RaspberryPi -- you said early on you want it to be able 
+to run on a RaspberryPi. 
+
+>> It does, yeah. 
+
+>> Including elastic search? 
+
+>> Yeah, yeah. The new RaspberryPi 2. It's quad-core. 
+
+>> Oh, the 2. Well oh. 
+
+>> Oh. 
+
+>> Still. 
+
+>> It's got a gig of RAM. It's pretty good. It could run New York in 100 millise
+conds. 
+
+>> Are you able to filter on what you expect from Overpass? Amenity, restaurant,
+ that sort of thing? 
+
+>> So there was a feature that we did a while back, taxonomy and categorization.
+ And when I was looking at that, I spent quite a long time on it. Decided that I
+ didn't want to use the OpenStreetMap taxonomy, because it's very OpenStreetMap.
+ And we have other datasets as well. So what we need to do is find a middle grou
+nd. So I went and looked at the FourSquare one. If you're interested, go and loo
+k at the FourSquare taxonomy. It's like 3,000 different categories for venues. I
+t's amazing. But again, it was too much, and it belonged to them. I looked at th
+e Google one, and the Google one is very interesting. There's 100 of them. But o
+ne of them is like RV parks. And there's like Christian churches and mosques but
+ not other churches. And it's like... How did you pick these things? So I looked
+ at all of those, and then mapped OSM to a kind of... Our own sort of category s
+tructure, which you can go and edit if you don't like as well, and we would like
+ feedback as well if people don't like it. And then we mapped geonames into that
+ categorization as well, and that means you can say -- I only want religious pla
+ces in my results, or I only want restaurants, or I only want Chinese restaurant
+s in my results or Mexican or something, depending on what categories have been 
+mapped. 
+
+>> You can sort by layers. Search by layers. So you can say -- I only want OSM d
+ata or I only want geonames data. 
+
+>> I was thinking of filtering within each of those. 
+
+>> Yeah. You can do --  
+
+>> And it's kind of like a freestyle thing. It's called categories internally, s
+o you could potentially --  
+
+>> Are you monitoring other category taxonomies for changes over time? 
+
+>> No. 
+
+>> Is yours changing? 
+
+>> Well, it was only done six weeks ago. It's probably the most current one out 
+there. There is a page on the wiki, if you look on the PELIAS and the wiki, you'
+ll see all my notes about doing that taxonomy. There's actually an in-depth anal
+ysis of all the taxonomies, with links to all the taxonomies. If you're interest
+ed in that, we can talk about it later. 
+
+>> You can see the mapping in our code from OSM to ours. 
+
+>> It's really astonishing how different these things are. 
+
+>> Taxonomies? Yeah, categorization is hard. How do you categorize stuff? It's q
+uite subjective. 
+
+>> And even the length -- you said FourSquare is 3,000? 
+
+>> Something like that, and the other day he said he wanted to add more? 
+
+>> And Yelp is included? 
+
+>> No, I think I did five different ones. But the FourSquare one is very impress
+ive, if you're interested. 
+
+>> How many folks are working on this? Except for yourself? 
+
+>> Reesh, myself, Julian just joined the team. 
+
+>> So four... And a half. 
+
+>> Four now. And a half. We had an intern who just left our team. 
+
+>> Is he here? He just did amazing work for us. Now he's going to MIT. 
+
+>> And (inaudible) from the New York Public Library is joining us. 
+
+>> He's right there. 
+
+>> Yeah, small team. 
+
+>> Yeah, it's cool. We're really interested in getting external feedback. Do peo
+ple like it, do they not, and there are definitely some changes that can be made
+. I think some of the search objects could be improved and some of the data and 
+the deduplication could be improved. The other thing that's interesting from the
+ OpenStreetMap community is we have a list of tags that we import. So we actuall
+y discard a lot of tags -- for instance, if it doesn't have a name, it doesn't n
+eed to be in geocoder. If it doesn't have a name, what are you going to search f
+or? But there are some things that end up being runway A of JFK, runway B, runwa
+y C -- kind of annoying. That's another thing I've been working on for a long ti
+me. Which is like -- doing analysis again, the second go at that, and figuring o
+ut which ones we want to import and which ones we want to leave out. It's always
+ going to annoy somebody. 
+
+>> I was just saying... I think if you put a house name, it doesn't import it. 
+
+>> A house name? 
+
+>> It doesn't understand that its name can be searched on as geocoded. 
+
+>> Really? House name like... 
+
+>> You were talking about that. 
+
+>> That's so annoying. What do people use house names for? 
+
+>> Like apartment house names. 
+
+>> Like, it's British. British has them a lot. Like old colonial houses. 
+
+>> The Irish like to use it too. Rural areas, instead of addresses, they sometim
+es use house names instead of numbers. 
+
+>> My landlord has one too. 
+
+>> Or The Dakota. Are you familiar with it? 
+
+>> Another good example is the Gherkin in London is the mayor's office. I'm not 
+sure if that's what it's called. It's a colloquial name. Another example of alte
+rnative names. We import a lot of them, but when I did an analysis of name tags 
+in OpenStreetMap, it might be on the wiki as well -- it's horrific. Just look at
+ it. It's nasty. 
+
+>> When we started a slack channel, just out of the birds of a feather that happ
+ened on Saturday for geocoders, and it's geocoders.slack.com. If you send us an 
+email to PELIAS, I'll add you guys to the conversation. It's just to get the com
+munity discussing these kinds of issues related to geocoding. So we'd love to ha
+ve your feedback. 
+
+>> It would be great to work on it together. You can see the complexity involved
+ with it. If you want to make your own geocoder, I encourage you to work with us
+. To make one for everybody, rather than making your own one. 
+
+>> And we talked about getting conclusive acceptance test suite -- so if you hav
+e things that you want to throw in there, that are important to you, as validati
+on for any geocoder, not just ours, we'd love to hear about that as well. 
+
+>> Cool, thank you. 
+
+(applause)
