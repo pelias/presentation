@@ -1,7 +1,7 @@
 
 # Geocoding with open data
 
-![peter](https://avatars3.githubusercontent.com/u/738069?v=3&s=240)
+![peter](https://avatars3.githubusercontent.com/u/738069?v=3&s=180)
 
 Peter Johnson
 - https://github.com/missinglink
@@ -134,7 +134,7 @@ http://pip.wiz.co.nz/
 
 # Questions?
 
-![peter](https://avatars3.githubusercontent.com/u/738069?v=3&s=240)
+![peter](https://avatars3.githubusercontent.com/u/738069?v=3&s=180)
 
 Peter Johnson
 - https://github.com/missinglink
